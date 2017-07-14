@@ -1,5 +1,3 @@
-import prodStore from './configureStore.prod';
-import devStore from './configureStore.dev';
 // Specify to enable development support in the store during
 // development
 // if (process.env.NODE_ENV === 'production') {

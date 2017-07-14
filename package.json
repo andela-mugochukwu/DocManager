@@ -5,11 +5,12 @@
   "main": "main.js",
   "scripts": {
     "test": "babel-node spec/run.js",
-    "start": "nodemon --watch server --exec babel-node --presets es2015 -- main.js",
     "start1": "node server",
     "test:client": "jest",
     "build": "rimraf dist && webpack --config ./webpack.config.js --progress --profile --colors",
-    "eslint": "eslint ."
+    "eslint": "eslint .",
+    "seed:db": "sequelize db:migrate && sequelize db:seed:all",  
+    "start": "NODE_ENV=test npm run seed:db && nodemon --watch server --exec babel-node --presets es2015 -- main.js"
   },
   "repository": {
     "type": "git",
