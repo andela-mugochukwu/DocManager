@@ -142,14 +142,14 @@ const signInValidation = (req, res, next) => {
   const err = { status: 'successful', message: [] };
   if (Object.keys(req.body).length !== 0 && req.body.constructor === Object) {
     const userNameValidation = generalValidation(req.body.userName);
-    const passwordValidation = validatePassword(req.body.password);
+    const passwordValidation = generalValidation(req.body.password);
     if (userNameValidation.status === 'successful' &&
       passwordValidation.status === 'successful') {
       next();
     } else {
       err.status = 'unsuccessful';
-      err.message.concat(userNameValidation.message,
-        passwordValidation.message);
+      err.message = err.message.concat(...userNameValidation.message,
+        ...passwordValidation.message);
       res.status(400).send(err);
     }
   } else {

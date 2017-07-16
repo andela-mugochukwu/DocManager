@@ -102,22 +102,22 @@ describe('validatePassword:', () => {
   });
 });
 
-const routeUrl = 'http://localhost:1844/api/v1';
-fdescribe('SignUpValidation()', () => {
-  const url = `${routeUrl}/users`;
+describe('SignIn and SignUp validation: ', () => {
+  const routeUrl = 'http://localhost:1844/api/v1';
   const userDetail = {
     userName: 'jackson',
     email: 'jackson@gmail.com',
     password: 'testing1',
+    roleId: 2,
   };
   let requestObject = {
-    url,
+    url: '',
     method: 'POST',
     json: userDetail,
   };
   afterEach((done) => {
     requestObject = {
-      url,
+      url: '',
       method: 'POST',
       json: userDetail,
     };
@@ -133,35 +133,96 @@ fdescribe('SignUpValidation()', () => {
       done();
     }).catch();
   });
-  it('should throw error when nothing is submitted', (done) => {
-    requestObject.json = {};
-    request(requestObject, (req, res, body) => {
-      expect(body.status).toBe('unsuccessful');
-      expect(body.message[0]).toBe('Empty fields are not allowed');
-      expect(res.statusCode).toBe(400);
-      done();
+
+  describe('SignUpValidation()', () => {
+    // function to run before all tests
+    beforeEach(() => {
+      requestObject.url = `${routeUrl}/users`;
     });
+
+    it('should throw error when nothing is submitted', (done) => {
+      requestObject.json = {};
+      request(requestObject, (req, res, body) => {
+        expect(body.status).toBe('unsuccessful');
+        expect(body.message[0]).toBe('Empty fields are not allowed');
+        expect(res.statusCode).toBe(400);
+        done();
+      });
+    });
+
+    it('Should move on to the next function when form is properly filled',
+      (done) => {
+        request(requestObject, (req, res) => {
+          expect(res.statusCode).toBe(200);
+          done();
+        });
+      });
+
+    it('Should return an error message when username is not filled',
+      (done) => {
+        requestObject.json.userName = '';
+        request(requestObject, (req, res, body) => {
+          expect(res.statusCode).toBe(400);
+          expect(body.status).toBe('unsuccessful');
+          expect(body.message
+            .includes('Empty or undefined fields are not allowed')
+          ).toBe(true);
+          done();
+        });
+      });
   });
 
-  it('Should move on to the next function when form is properly filled',
-    (done) => {
-      request(requestObject, (req, res) => {
-        expect(res.statusCode).toBe(200);
-        done();
-      });
+  describe('SignInValidation()', () => {
+    beforeEach(() => {
+      requestObject.url = `${routeUrl}/users/login`;
     });
-
-  it('Should return an error message when username is not filled',
-    (done) => {
-      requestObject.json.userName = '';
+    it('Should return error message when empty form is sent', (done) => {
+      requestObject.json = {};
       request(requestObject, (req, res, body) => {
-        expect(res.statusCode).toBe(400);
         expect(body.status).toBe('unsuccessful');
-        expect(body.message
-          .includes('Empty or undefined fields are not allowed')
-        ).toBe(true);
+        expect(res.statusCode).toBe(400);
+        expect(body.message.includes('Empty forms are not allowed!'))
+          .toBe(true);
         done();
       });
     });
-});
 
+    it('Should move to the next function when form is correctly filled',
+      (done) => {
+        requestObject.url = `${routeUrl}/users`;
+        request(requestObject, () => {
+          requestObject.url = `${routeUrl}/users/login`;
+          request(requestObject, (req, res, body) => {
+            expect(body.status).toBe('successful');
+            done();
+          });
+        });
+      });
+
+    it('Should throw correct error message when password has a wrong format',
+      (done) => {
+        requestObject.json.password = '';
+        request(requestObject, (req, res, body) => {
+          expect(body.status).toBe('unsuccessful');
+          expect(res.statusCode).toBe(400);
+          expect(body.message
+            .includes('Empty or undefined fields are not allowed'))
+            .toBe(true);
+          done();
+        });
+      });
+
+    it('Should throw correct error message when username has a wrong format',
+      (done) => {
+        requestObject.json.userName = '';
+        request(requestObject, (req, res, body) => {
+          expect(body.status).toBe('unsuccessful');
+          expect(res.statusCode).toBe(400);
+          expect(body.message
+            .includes('Empty or undefined fields are not allowed'))
+            .toBe(true);
+          done();
+        });
+      });
+  });
+});
