@@ -14,6 +14,18 @@ module.exports = {
       roletype: 'Admin',
       createdAt: new Date(),
       updatedAt: new Date(),
+    }, {
+      roletype: 'fellow',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      roletype: 'learning',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }, {
+      roletype: 'pandc',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }]);
   },
 

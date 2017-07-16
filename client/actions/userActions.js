@@ -15,44 +15,52 @@ export const errorSignInUser = errors => ({
   type: types.FAILEDSIGNIN,
   errors,
 });
-
-// export const signInUser = user => (dispatch) => {
-//   // Notify the user that signin process has started
-//   dispatch(startSignInUser());
-//   // make api calls via jquery ajax
-//   $.ajax('/api/v1/users/signin', {
-//     data: user,
-//     dataType: 'json',
-//     success: (userDetail) => {
-//       if (userDetail.status === 'successful') {
-//         dispatch(finishSignInUser(userDetail));
-//         localStorage.setItem('doctoken', userDetail.token);
-//       }
-//       if (userDetail.status === 'unsuccessful') {
-//         dispatch(finishSignInUser(userDetail));
-//       }
-//     },
-//     error: (jqXHR, status) => {
-//       dispatch(errorSignInUser(status));
-//     }
-//   });
-// };
-
-export const signInUser = user => (
-  dispatch => (
-    axios.post('/api/v1/users/login', user)
-  ).then((response) => {
-    console.log(response);
+/**
+ * Dispatches an action to sign in a user
+ * @param {object} user - Form data to send to the server
+ * @return {func} returns a function that will be executed to signin a user
+ */
+export const signInUser = user => (dispatch) => {
+  dispatch(startSignInUser());
+  return axios.post('/api/v1/users/login', user)
+  .then((response) => {
     dispatch(finishSignInUser(response.data));
-    localStorage.setItem('doctoken', response.data.token);
+    localStorage.setItem('docmanagertoken', response.data.token);
   },
 ({ response }) => {
-  console.log('error', response);
   dispatch(errorSignInUser(response.data));
   return true;
-})
-);
-
-export const signUpUSer = () => ({
-  type: types.SIGNUP,
 });
+};
+
+export const startSignUpUser = () => ({
+  type: types.STARTSIGNIN,
+});
+
+export const finishSignUpUser = userDetail => ({
+  type: types.SUCCESSFULSIGNIN,
+  userDetail,
+});
+
+export const errorSignUpUser = errors => ({
+  type: types.FAILEDSIGNIN,
+  errors,
+});
+
+/**
+ * Dispatches an action to sign in a user
+ * @param {object} user - Form data to send to the server
+ * @return {func} returns a function that will be executed to signin a user
+ */
+export const signUpUser = user => (dispatch) => {
+  dispatch(startSignUpUser());
+  return axios.post('/api/v1/users', user)
+  .then((response) => {
+    dispatch(finishSignUpUser(response.data));
+    localStorage.setItem('docmanagertoken', response.data.token);
+  },
+({ response }) => {
+  dispatch(errorSignUpUser(response.data));
+  return true;
+});
+};
