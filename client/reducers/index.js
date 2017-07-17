@@ -30,6 +30,10 @@ const SignIn = (state = {
   }
 };
 
+const documents= () => {
+
+};
+
 const rootReducer = combineReducers({
   SignIn,
   routing

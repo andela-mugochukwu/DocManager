@@ -1,8 +1,12 @@
 import request from 'request';
 import index from '../../server/models';
-import { generalValidation, validateEmail, validatePassword } from
+import {
+  generalValidation, validateEmail,
+  createToken, validatePassword
+} from
   '../../server/controller/middlewares/validation';
 
+const routeUrl = 'http://localhost:1844/api/v1';
 describe('generalValidation()', () => {
   it('should throw error when script char (<,>) is used', () => {
     const user = generalValidation('<script>alert(\'I Love you\')</script>');
@@ -103,8 +107,7 @@ describe('validatePassword:', () => {
 });
 
 describe('SignIn and SignUp validation: ', () => {
-  const routeUrl = 'http://localhost:1844/api/v1';
-  const userDetail = {
+  let userDetail = {
     userName: 'jackson',
     email: 'jackson@gmail.com',
     password: 'testing1',
@@ -115,6 +118,16 @@ describe('SignIn and SignUp validation: ', () => {
     method: 'POST',
     json: userDetail,
   };
+
+  beforeEach(() => {
+    userDetail = {
+      userName: 'jackson',
+      email: 'jackson@gmail.com',
+      password: 'testing1',
+      roleId: 2,
+    };
+  });
+
   afterEach((done) => {
     requestObject = {
       url: '',
@@ -134,44 +147,6 @@ describe('SignIn and SignUp validation: ', () => {
     }).catch();
   });
 
-  describe('SignUpValidation()', () => {
-    // function to run before all tests
-    beforeEach(() => {
-      requestObject.url = `${routeUrl}/users`;
-    });
-
-    it('should throw error when nothing is submitted', (done) => {
-      requestObject.json = {};
-      request(requestObject, (req, res, body) => {
-        expect(body.status).toBe('unsuccessful');
-        expect(body.message[0]).toBe('Empty fields are not allowed');
-        expect(res.statusCode).toBe(400);
-        done();
-      });
-    });
-
-    it('Should move on to the next function when form is properly filled',
-      (done) => {
-        request(requestObject, (req, res) => {
-          expect(res.statusCode).toBe(200);
-          done();
-        });
-      });
-
-    it('Should return an error message when username is not filled',
-      (done) => {
-        requestObject.json.userName = '';
-        request(requestObject, (req, res, body) => {
-          expect(res.statusCode).toBe(400);
-          expect(body.status).toBe('unsuccessful');
-          expect(body.message
-            .includes('Empty or undefined fields are not allowed')
-          ).toBe(true);
-          done();
-        });
-      });
-  });
-
   describe('SignInValidation()', () => {
     beforeEach(() => {
       requestObject.url = `${routeUrl}/users/login`;
@@ -187,7 +162,7 @@ describe('SignIn and SignUp validation: ', () => {
       });
     });
 
-    it('Should move to the next function when form is correctly filled',
+    it('Should move to the next function when form submitted is valid',
       (done) => {
         requestObject.url = `${routeUrl}/users`;
         request(requestObject, () => {
@@ -224,5 +199,164 @@ describe('SignIn and SignUp validation: ', () => {
           done();
         });
       });
+  });
+
+  describe('SignUpValidation()', () => {
+    // function to run before all tests
+    beforeEach(() => {
+      requestObject.url = `${routeUrl}/users`;
+      requestObject.json = userDetail;
+    });
+
+    it('should throw error when nothing is submitted', (done) => {
+      requestObject.json = {};
+      request(requestObject, (req, res, body) => {
+        expect(body.status).toBe('unsuccessful');
+        expect(body.message[0]).toBe('Empty fields are not allowed');
+        expect(res.statusCode).toBe(400);
+        done();
+      });
+    });
+
+    it('Should move on to the next function when form is valid',
+      (done) => {
+        request(requestObject, (req, res, body) => {
+          expect(body.status).not.toBe('unsuccessful');
+          done();
+        });
+      });
+
+    it('Should return an error message when username is not filled',
+      (done) => {
+        requestObject.json.userName = '';
+        request(requestObject, (req, res, body) => {
+          expect(res.statusCode).toBe(400);
+          expect(body.status).toBe('unsuccessful');
+          expect(body.message
+            .includes('Empty or undefined fields are not allowed')
+          ).toBe(true);
+          done();
+        });
+      });
+  });
+});
+
+describe('createToken()', () => {
+  it('should return a token as string when called', () => {
+    const user = {
+      userName: 'jackson',
+      email: 'jackson@gmail.com',
+      roleId: '1',
+    };
+    expect(typeof createToken(user)).toBe('string');
+  });
+});
+
+describe('verifyToken', () => {
+  const url = `${routeUrl}/users/141`;
+  const requestObject = {
+    url,
+    method: 'PUT',
+    json: {
+      token: 'fjshdoeslhfske7383.sljshjfdfeoekso.8887hkjklfksjse',
+    }
+  };
+  it('should not authenticate the request when invalid token is used',
+    (done) => {
+      request(requestObject, (req, res, body) => {
+        expect(res.statusCode).toBe(400);
+        expect(body.message).toBe('You are not authenticated!');
+        expect(body.status).toBe('unsuccessful');
+        done();
+      });
+    });
+
+  it(`should not authenticate request when 
+  fake user info is embedded in token`, (done) => {
+    const token = createToken({
+      userName: 'james',
+      password: 'testing1',
+      email: 'jamaes@yahoo.com',
+    });
+    requestObject.json.token = token;
+    request(requestObject, (req, res, body) => {
+      expect(body.message).toBe('Invalid user- you are not authenticated!');
+      expect(res.statusCode).toBe(400);
+      expect(body.status).toBe('unsuccessful');
+      done();
+    });
+  });
+
+  it('should move to next function when user detail is correct', (done) => {
+    const token = createToken({
+      userName: 'james008',
+      password: 'testing1',
+      email: 'jamaes008@gmail.com',
+    });
+    requestObject.json.token = token;
+    request(requestObject, (req, res, body) => {
+      expect(body.message.includes('You are not authenticated!'))
+        .toBe(false);
+      expect(body.message.includes('Invalid user- you are not authenticated!'))
+        .toBe(false);
+      done();
+    });
+  });
+});
+
+describe('allowOnlyAdmin()', () => {
+  const token = createToken({
+    userName: 'touchstone',
+    password: 'testing1',
+    email: 'touchstone@gmail.com',
+    roleId: 3,
+  });
+  const url = `${routeUrl}/users/141`;
+  const requestObject = {
+    url,
+    method: 'GET',
+    json: {
+      token,
+    }
+  };
+
+  afterEach(() => {
+    requestObject.json.token = token;
+  });
+
+  it('should allow only the admin as touchstone to access the next function',
+    (done) => {
+      request(requestObject, (req, res, body) => {
+        expect(body.status).not.toBe('unsuccessful');
+        done();
+      });
+    });
+
+  it('should deny access to other admin aside touchstone', (done) => {
+    requestObject.json.token = createToken({
+      userName: 'james013',
+      password: 'testing1',
+      email: 'james013@gmail.com',
+      roleId: 3,
+    });
+    request(requestObject, (req, res, body) => {
+      expect(body.status).toBe('unsuccessful');
+      expect(body.message.includes('Access denied!'))
+        .toBe(true);
+      done();
+    });
+  });
+
+  it('should throw error when no role information is given', (done) => {
+    requestObject.json.token = createToken({
+      userName: 'james013',
+      password: 'testing1',
+      email: 'james013@gmail.com',
+    });
+    request(requestObject, (req, res, body) => {
+      expect(body.message).toBe('Access denied!');
+      expect(body.status).toBe('unsuccessful');
+      done();
+    });
   });
 });

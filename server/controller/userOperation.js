@@ -37,21 +37,21 @@ const signUpUser = (req, res) => {
           userEmail: createdUser.email,
           token,
         };
-        res.send({
+        res.status(200).send({
           status: 'successful',
           ...userToken,
         });
       } else {
-        res.send({
+        res.status(400).send({
           status: 'unsuccessful',
           message: 'User already exist',
         });
       }
     }).catch(() => {
-      res.send({
+      res.status(500).send({
         status: 'unsuccessful',
         message:
-        'An error just occured on the server while trying to sign you up'
+        'Server error just occured!'
       });
     });
   });
@@ -88,7 +88,7 @@ const signInUser = (req, res) => {
       } else {
         res.status(400).send({
           status: 'unsuccessful',
-          message: 'Wrong username or password',
+          message: 'Wrong username or password!',
         });
       }
     });

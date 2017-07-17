@@ -1,90 +1,65 @@
 import request from 'request';
 import index from '../../server/models';
 
-describe('The app route', () => {
-  let userInfo = {};
-  const url = 'http://localhost:1844/';
+const routeUrl = 'http://localhost:1844/api/v1';
+fdescribe('getUserDocuments()', () => {
+  const userDetail = {
+    userName: 'jackson',
+    email: 'jackson@gmail.com',
+    password: 'testing1',
+    roleId: 2,
+  };
+  const document = {
+    title: 'This is just a test',
+    body: 'I really want to take a timeout to test my functions.',
+    access: 2,
+    userId: 0,
+  };
+  let requestObject = {
+    url: `${routeUrl}/users`,
+    method: 'POST',
+    json: userDetail,
+  };
 
-  beforeAll(() => {
-    userInfo = {
-      title: 'I love programming in python',
-      body: 'Javascript is frustrating, but cannot say the same for python.',
-      access: 'private',
-      userId: '6',
-    };
+  beforeEach((done) => {
+    // create a user first
+    request(requestObject, (req, res, body) => {
+      document.userId = body.userId;
+      document.token = body.token;
+      requestObject.json = document;
+      requestObject.url = `${routeUrl}/documents`;
+      request(requestObject, () => {
+        done();
+      });
+    });
   });
 
-  afterAll((done) => {
-    const document = index.Document;
-    document.destroy({
-      where: {
-        title: 'I love programming in python',
+  afterEach((done) => {
+    requestObject = {
+      url: `${routeUrl}/users`,
+      method: 'POST',
+      json: userDetail,
+    };
+    const user = index.User;
+    user.findById(document.userId).then((foundUser) => {
+      if (foundUser) {
+        foundUser.destroy();
       }
-    }).then(() => {
+      document.userId = 0;
+      document.token = '';
+      requestObject.json = {};
+      console.log('.............///////', requestObject);
+      done();
+    }).catch();
+  });
+
+  it('should successfully get user document that exist', (done) => {
+    requestObject.url = `${routeUrl}/${document.userId}/documents`;
+    requestObject.method = 'GET';
+    request(requestObject, (req, res, body) => {
+      expect(res.statusCode).toBe(200);
+      expect(body.status).toBe('successful');
       done();
     });
   });
-
-  afterEach(() => {
-    userInfo = {
-      title: 'I love programming in python',
-      body: 'Javascript is frustrating, but cannot say the same for python.',
-      access: 'private',
-      userId: '132',
-    };
-  });
-
-  it('should return a status code of 200 when the default root is called',
-    (done) => {
-      const endPoint = url;
-      request.get(endPoint, (error, response) => {
-        expect(response.statusCode).toBe(200);
-        done();
-      });
-    });
-
-  it('should fire the error route callback when no route is matched',
-    (done) => {
-      const endPoint = `${url}getball`;
-      request.get(endPoint, (error, response, body) => {
-        expect(body).toBe(`404 error has occured! The page you're 
-      searching for cannot be found`);
-        expect(response.statusCode).toBe(404);
-        done();
-      });
-    });
-
-  it('should return successful when document is successfully created',
-    (done) => {
-      const endPoint = `${url}documents`;
-      request({
-        url: endPoint,
-        method: 'POST',
-        json: userInfo,
-      }, (err, res, body) => {
-        expect(body).toBe('successful');
-        done();
-      });
-    });
-
-  it('should not hit the database to save anything when empty form is sent',
-    (done) => {
-      // create the endpoint url
-      const endPoint = `${url}documents`;
-      // empty the form and send the request
-      userInfo = {
-        title: '',
-        body: '',
-        roleId: 1,
-        access: 'public',
-      };
-      request({
-        url: endPoint,
-        method: 'POST',
-        json: userInfo,
-      }, (err, res, body) => {
-        expect(body).toBe('Empty title or body or access field!');
-        done();
-      });
-    });
 });

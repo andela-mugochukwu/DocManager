@@ -92,20 +92,20 @@ const getUserDocuments = (req, res) => {
     },
   }).then((documents) => {
     if (documents.count > 0) {
-      res.send({
+      res.status(200).send({
         status: 'successful',
         userId,
         userName: req.query.userName,
         documents: documents.rows,
       });
     } else {
-      res.send({
+      res.status(400).send({
         status: 'unsuccessful',
         message: 'No document was found',
       });
     }
   }).catch(() => {
-    res.send({
+    res.status(500).send({
       status: 'unsuccessful',
       message: 'Could not fetch all your documents!',
     });

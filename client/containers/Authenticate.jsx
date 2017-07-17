@@ -21,7 +21,12 @@ class Authenticate extends React.Component {
       errors: nextProps.SignIn.errors,
     });
   }
-
+/**
+ * Fires the function that authenticates a user
+ * @param {object} event - object containing data about the control that
+ * triggered an event
+ * @return {null} returns void
+ */
   signUserIn(event) {
     event.preventDefault();
     const userName = $('#signinform input[type=text]').val();
@@ -29,14 +34,15 @@ class Authenticate extends React.Component {
     const formData = { userName, password };
     this.props.signInUser(formData)
     .then((res) => {
-      if (res) {
-        console.log(this.state.errors);
-      } else {
+      if (!res) {
         this.props.history.push('/user/documents');
       }
     });
   }
-
+/**
+ * shows or hides the signin form
+ * @return {null} returns void
+ */
   showSignInForm() {
     const signInForm = $('#signinform');
     const signUpForm = $('#signupform');
@@ -44,7 +50,10 @@ class Authenticate extends React.Component {
       signInForm.slideDown(400);
     });
   }
-
+/**
+ * shows or hides the signup form
+ * @return {null} returns void
+ */
   showSignUpForm() {
     const signInForm = $('#signinform');
     const signUpForm = $('#signupform');
@@ -52,6 +61,10 @@ class Authenticate extends React.Component {
       signUpForm.slideDown(400);
     });
   }
+  /**
+   * Renders the html content on the browser
+   * @return {object} returns an object containing the html to be render
+   */
   render() {
     return (
       <div className="container">
@@ -139,4 +152,5 @@ const mapStateToProps = state => ({
   SignIn: state.SignIn,
 });
 
-export default connect(mapStateToProps, { signInUser })(withRouter(Authenticate));
+export default connect(mapStateToProps,
+  { signInUser })(withRouter(Authenticate));
