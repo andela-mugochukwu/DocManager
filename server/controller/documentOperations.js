@@ -9,10 +9,14 @@ const document = index.Document;
  * and false otherwise
  */
 const createDocument = (req, res) => {
-  const title = req.body.title;
-  const body = req.body.body;
-  const userId = req.body.userId;
-  const access = req.body.access;
+  const title = typeof req.body.title === 'undefined' ?
+    '' : req.body.title;
+  const body = typeof req.body.body === 'undefined' ?
+    '' : req.body.body;
+  const userId = typeof req.body.userId === 'undefined' ?
+    '' : req.body.userId;
+  const access = typeof req.body.access === 'undefined' ?
+    '' : req.body.access;
   // Don't create document if fields are empty
   if (title === '' || body === '' || access === '') {
     res.send({

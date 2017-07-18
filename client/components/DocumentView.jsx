@@ -7,6 +7,10 @@ import { startGetUserDocuments,
   getUserDocuments } from '../actions/documentActions';
 
 class DocumentView extends React.Component {
+/**
+ * Executes before component mounts
+ * @return {null} returns void
+ */
   componentWillMount() {
     this.props.startFetchingDocuments();
   }
@@ -55,6 +59,7 @@ const mapDispatchToProps = dispatch => ({
 DocumentView.propTypes = {
   documentStatus: propTypes.string.isRequired,
   startFetchingDocuments: propTypes.func.isRequired,
+  documents: propTypes.array.isRequired,
   id: propTypes.number.isRequired,
   fetchDocuments: propTypes.func.isRequired,
   shouldDisplay: propTypes.bool.isRequired,

@@ -6869,6 +6869,9 @@ section {
   .header button {
     margin-right: 5px; }
 
+textarea {
+  height: 40%; }
+
 #doc-view-background {
   min-height: inherit; }
 
