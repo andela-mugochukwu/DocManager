@@ -6869,6 +6869,9 @@ section {
   .header button {
     margin-right: 5px; }
 
+#doc-view-background {
+  min-height: inherit; }
+
 .docbackground {
   background: linear-gradient(rgba(7, 31, 36, 0.9), #171a17, rgba(7, 31, 36, 0.9)); }
 

@@ -1,15 +1,21 @@
 import React from 'react';
 import $ from 'jquery';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { signInUser } from '../actions/userActions';
-
+/**
+ * Renders the authentication form
+ */
 class Authenticate extends React.Component {
+  /**
+   * Initializes the functions and state required
+   * @param {object} props - the state object containing error information
+   */
   constructor(props) {
     super(props);
     this.state = {
-      errors: this.props.SignIn.errors,
+      errors: this.props.signIn.errors,
     };
     this.showSignInForm = this.showSignInForm.bind(this);
     this.showSignUpForm = this.showSignUpForm.bind(this);
@@ -18,7 +24,7 @@ class Authenticate extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      errors: nextProps.SignIn.errors,
+      errors: nextProps.signIn.errors,
     });
   }
 /**
@@ -148,8 +154,8 @@ Authenticate.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  signInButtonText: state.SignIn.status,
-  SignIn: state.SignIn,
+  signInButtonText: state.signIn.status,
+  signIn: state.signIn,
 });
 
 export default connect(mapStateToProps,

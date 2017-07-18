@@ -2,13 +2,16 @@ import request from 'request';
 import index from '../../server/models';
 
 const routeUrl = 'http://localhost:1844/api/v1';
+const userDetail = {
+  userName: 'jackson',
+  email: 'jackson@gmail.com',
+  password: 'testing1',
+  roleId: 2,
+};
+fdescribe('createDocument()', () => {
+
+});
 fdescribe('getUserDocuments()', () => {
-  const userDetail = {
-    userName: 'jackson',
-    email: 'jackson@gmail.com',
-    password: 'testing1',
-    roleId: 2,
-  };
   const document = {
     title: 'This is just a test',
     body: 'I really want to take a timeout to test my functions.',
@@ -48,7 +51,6 @@ fdescribe('getUserDocuments()', () => {
       document.userId = 0;
       document.token = '';
       requestObject.json = {};
-      console.log('.............///////', requestObject);
       done();
     }).catch();
   });

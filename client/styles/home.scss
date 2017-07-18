@@ -16,6 +16,9 @@ section {
 		margin-right: $contentpadding;
 	}
 }
+#doc-view-background{
+	min-height: inherit
+}
 .docbackground{
 	background: $shadebackground;
 }

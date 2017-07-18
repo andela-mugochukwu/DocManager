@@ -1,16 +1,27 @@
-import $ from 'jquery';
 import axios from 'axios';
 import * as types from './types';
 
+/**
+ * Dispatches an action when signin starts
+ * @return {object} returns an object containing action type
+ */
 export const startSignInUser = () => ({
   type: types.STARTSIGNIN,
 });
-
+/**
+ * Dispatches an action when signin completes successfully
+ * @param {object} userDetail - User information from signin process
+ * @return {object} returns an object containing user details and action type
+ */
 export const finishSignInUser = userDetail => ({
   type: types.SUCCESSFULSIGNIN,
   userDetail,
 });
-
+/**
+ * Dispatches an action when signin error occurs
+ * @param {object} errors - Errors from signin process
+ * @return {object} returns an object containing errors and action type
+ */
 export const errorSignInUser = errors => ({
   type: types.FAILEDSIGNIN,
   errors,
@@ -28,22 +39,33 @@ export const signInUser = user => (dispatch) => {
     localStorage.setItem('docmanagertoken', response.data.token);
   },
 ({ response }) => {
-  dispatch(errorSignInUser(response.data));
+  dispatch(errorSignInUser(response.data.message));
   return true;
 });
 };
-
+/**
+ * Dispatches an action when signin starts
+ * @return {object} returns an object containing action type
+ */
 export const startSignUpUser = () => ({
-  type: types.STARTSIGNIN,
+  type: types.STARTSIGNUP,
 });
-
+/**
+ * Dispatches an action when signup completes successfully
+ * @param {object} userDetail - User information from signup process
+ * @return {object} returns an object containing user details and action type
+ */
 export const finishSignUpUser = userDetail => ({
-  type: types.SUCCESSFULSIGNIN,
+  type: types.SUCCESSFULSIGNUP,
   userDetail,
 });
-
+/**
+ * Dispatches an action when signup error occurs
+ * @param {object} errors - Errors from signin process
+ * @return {object} returns an object containing errors and action type
+ */
 export const errorSignUpUser = errors => ({
-  type: types.FAILEDSIGNIN,
+  type: types.FAILEDSIGNUP,
   errors,
 });
 
@@ -60,7 +82,7 @@ export const signUpUser = user => (dispatch) => {
     localStorage.setItem('docmanagertoken', response.data.token);
   },
 ({ response }) => {
-  dispatch(errorSignUpUser(response.data));
+  dispatch(errorSignUpUser(response.data.message));
   return true;
 });
 };

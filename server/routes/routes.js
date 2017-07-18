@@ -28,20 +28,20 @@ const routes = (router) => {
   router.post('/users/login', signInValidation, signInUser);
 
   router.use(verifyToken);
+  // Update a specific user
+  router.put('/users/:id', signUpValidation, updateUser);
   // route to create role
   router.post('/role', allowOnlyAdmin, createRole);
   // route to get all users and paginate them
   router.get('/users', allowOnlyAdmin, getAllUsers);
   // Find a specific user
   router.get('/users/:id', allowOnlyAdmin, findUser);
-  // Update a specific user
-  router.put('/users/:id', signUpValidation, updateUser);
-  // route to fetch documents belonging to a user
-  router.get('/users/:id/documents', getUserDocuments);
   // Deletes a specific user
   router.delete('/users/:id', allowOnlyAdmin, deleteUser);
   // route to search for users
   router.get('/search/users', allowOnlyAdmin, findUsers);
+  // route to fetch documents belonging to a user
+  router.get('/users/:id/documents', getUserDocuments);
   // route to get all documents
   router.get('/documents', getAllDocuments);
   // route to create a new document

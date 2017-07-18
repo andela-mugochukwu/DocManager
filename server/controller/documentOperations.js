@@ -105,7 +105,7 @@ const getUserDocuments = (req, res) => {
       });
     }
   }).catch(() => {
-    res.status(500).send({
+    res.status(400).send({
       status: 'unsuccessful',
       message: 'Could not fetch all your documents!',
     });
