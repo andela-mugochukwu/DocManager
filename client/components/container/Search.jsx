@@ -4,8 +4,5 @@ import { connect } from 'react-redux';
 import { searchDocuments } from '../../actions/documentActions';
 import Search from '../presentation/Search';
 
-const mapStateToProps = () => ({
-
-});
 export default
-connect(mapStateToProps, { searchDocuments })(withRouter(Search));
+connect(null, { searchDocuments })(withRouter(Search));

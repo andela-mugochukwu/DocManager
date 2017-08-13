@@ -20,10 +20,6 @@ const About = () => (
     <ol>
       <li>Mazi Ugochukwu Kingsley</li>
       <li>Mark Edomwande</li>
-      <li>Okwudiri Celestine</li>
-      <li>Bamidele Daniel</li>
-      <li>Falayi Esther</li>
-      <li>Haruna Memuna</li>
     </ol>
   </div>);
 

@@ -58,13 +58,8 @@ module.exports = {
  * @return {null} it returns no value
  */
   getUserDocuments(req, res) {
-    let params;
-    // check it limit and offset where passed
-    if (req.query.offset && req.query.limit) {
-      params = { offset: req.query.offset, limit: req.query.limit };
-    } else {
-      params = { offset: 0, limit: 8 };
-    }
+    const params = { offset: req.query.offset || 0,
+      limit: req.query.limit || 8 };
     Document.findAndCountAll({
       where: { userId: req.body.user.userId },
       attributes: ['id', 'title', 'body', 'userId', 'access', 'createdAt'],
@@ -314,13 +309,8 @@ module.exports = {
  * @return {null} Returns null
  */
   search(req, res) {
-    let params;
-    // check it limit and offset where passed
-    if (req.query.offset && req.query.limit) {
-      params = { offset: req.query.offset, limit: req.query.limit };
-    } else {
-      params = { offset: 0, limit: 8 };
-    }
+    const params = { offset: req.query.offset || 0,
+      limit: req.query.limit || 8 };
     if (!req.query.q) {
       return res.status(400).send({
         status: 'unsuccessful',

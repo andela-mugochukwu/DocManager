@@ -67,7 +67,7 @@ const ReadDocument = ({ documentTitle, body, author,
       </div><br />
       <div id="docbodyedit" className="hide">
         <TinyMCE
-          content={parser(body)}
+          content={body}
           config={{
             plugins: 'autolink link image lists print preview',
             toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',

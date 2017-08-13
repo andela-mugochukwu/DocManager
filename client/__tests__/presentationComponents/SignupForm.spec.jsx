@@ -1,32 +1,23 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import SignupForm from '../../components/presentation/SignupForm';
 
 describe('The signupform component:', () => {
   const history = { push: url => url };
+  const response = { status: 'successful' };
   const props = {
-    signUserUp: jest.fn(() => Promise.resolve()),
+    signUserUp: jest.fn(() => Promise.resolve(response)),
     allDocuments: jest.fn(() => Promise.resolve()),
     submitButton: 'submit',
     roleType: 'Admin',
     history,
   };
-  const enzymeWrapper = mount(<SignupForm {...props} />);
   test('should render the signup form correctly', () => {
-    const signUserUp = jest.fn(() => Promise.resolve());
-    const allDocuments = jest.fn(() => Promise.resolve());
-    const submitButton = 'submit';
-    const roleType = 'Admin';
     const component = renderer.create(
-      <SignupForm
-        history={history}
-        signUserUp={signUserUp}
-        submitButton={submitButton}
-        roleType={roleType}
-        allDocuments={allDocuments}
-      />
+      <SignupForm {...props} />
   );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -36,7 +27,20 @@ describe('The signupform component:', () => {
     const event = {
       preventDefault: () => 'hello',
     };
+    const enzymeWrapper = mount(<SignupForm {...props} />);
     enzymeWrapper.find('button#signupbtn').props().onClick(event);
     expect(props.signUserUp.mock.calls.length).toBe(1);
+  });
+
+  test('should alert an error message when signup fails', () => {
+    response.status = 'unsuccessful';
+    const event = {
+      preventDefault: () => 'hello',
+    };
+    const enzymeWrapper = mount(<SignupForm {...props} />);
+    enzymeWrapper.find('button#signupbtn').props().onClick(event);
+    const component = enzymeWrapper;
+    const tree = toJson(component);
+    expect(tree).toMatchSnapshot();
   });
 });

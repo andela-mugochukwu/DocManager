@@ -162,11 +162,9 @@ module.exports = {
    * @return {null} Returns null
    */
   getAll(req, res) {
-    let params;
     // check it limit and offset where passed
-    if (req.query.offset && req.query.limit) {
-      params = { offset: req.query.offset, limit: req.query.limit };
-    }
+    const params = { offset: req.query.offset || 0,
+      limit: req.query.limit || 8 };
     User.findAndCountAll({
       attributes:
       ['id', 'username', 'email', 'roleId', 'isactive', 'createdAt'],
@@ -176,6 +174,9 @@ module.exports = {
         status: 'successful',
         count: users.count,
         users: users.rows,
+        curPage: parseInt(params.offset / params.limit, 10) + 1,
+        pageCount: parseInt(users.count / params.limit, 10),
+        pageSize: users.rows.length
       });
     }).catch(() => {
       res.status(400).send({
@@ -192,12 +193,8 @@ module.exports = {
    * @return {null} Returns null
    */
   find(req, res) {
-    const searchParams = req.query;
-    let params;
-    // check it limit and offset where passed
-    if (searchParams.offset && searchParams.limit) {
-      params = { offset: searchParams.offset, limit: searchParams.limit };
-    }
+    const params = { offset: req.query.offset || 0,
+      limit: req.query.limit || 8 };
     if (!req.query.q) {
       res.status(400).send({
         status: 'unsuccessful',
@@ -218,6 +215,9 @@ module.exports = {
           status: 'successful',
           count: users.count,
           users: users.row,
+          curPage: parseInt(params.offset / params.limit, 10) + 1,
+          pageCount: parseInt(users.count / params.limit, 10),
+          pageSize: users.rows.length
         });
       }).catch(() => {
         res.status(400).send({
@@ -294,7 +294,6 @@ module.exports = {
         if (foundUser) {
           bcrypt.compare(req.body.oldPassword, foundUser.password,
             (err, response) => {
-              console.log('..........true!', req.body.oldPassword, foundUser.password);
               if (response) {
                 userDetail.password = req.body.password;
               }

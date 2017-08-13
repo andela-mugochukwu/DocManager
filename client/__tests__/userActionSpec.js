@@ -46,7 +46,7 @@ describe('userAction():', () => {
   });
 
   test('creates SUCCESSFUL_SIGNIN when signing in user has been done',
-  () => {
+  (done) => {
     const user = { name: 'jackson',
       email: 'jackson@gmail.com',
       roleValue: 'Admin' };
@@ -65,13 +65,15 @@ describe('userAction():', () => {
       { type: types.SUCCESSFUL_SIGNIN, userDetail: response }
     ];
     const store = mockStore({ users: {} });
-    return store.dispatch(userAction.signInUser(user)).then(() => {
+    store.dispatch(userAction.signInUser(user)).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
+    done();
   });
 
-  test('creates SUCCESSFUL_SIGNIN when signing in user has an error', () => {
+  test('creates SUCCESSFUL_SIGNIN when signing in user has an error',
+  (done) => {
     const user = { name: 'jackson',
       email: 'jackson@gmail.com',
       roleValue: 'Admin' };
@@ -90,10 +92,11 @@ describe('userAction():', () => {
         errors: 'an error occured', },
     ];
     const store = mockStore({ users: {} });
-    return store.dispatch(userAction.signInUser(user)).then(() => {
+    store.dispatch(userAction.signInUser(user)).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedAction);
     });
+    done();
   });
 
   test(`that setUserRole function should return
@@ -138,7 +141,7 @@ describe('userAction():', () => {
   });
 
   test('creates SUCCESSFUL_SIGNUP when signing up user has been done',
-  () => {
+  (done) => {
     const user = { name: 'jackson',
       email: 'jackson@gmail.com',
       roleValue: 'Admin' };
@@ -152,8 +155,8 @@ describe('userAction():', () => {
     });
 
     const expectedActions = [
-      { type: types.START_SIGNUP, },
       { type: types.SET_USER_ROLE, userRole: 'Admin' },
+      { type: types.START_SIGNUP, },
       { type: types.SUCCESSFUL_SIGNUP, userDetail: response }
     ];
     const store = mockStore({ users: [] });
@@ -161,10 +164,11 @@ describe('userAction():', () => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
+    done();
   });
 
   test('creates SUCCESSFUL_SIGNUP when an error occurred signing up user',
-  () => {
+  (done) => {
     const user = { name: 'jackson',
       email: 'jackson@gmail.com',
       roleValue: 'Learning' };
@@ -178,8 +182,8 @@ describe('userAction():', () => {
     });
 
     const expectedActions = [
-      { type: types.START_SIGNUP, },
       { type: types.SET_USER_ROLE, userRole: 'Learning' },
+      { type: types.START_SIGNUP, },
       { type: types.FAILED_SIGNUP, errors: 'unsuccessful' }
     ];
     const store = mockStore({ users: [] });
@@ -187,6 +191,7 @@ describe('userAction():', () => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
+    done();
   });
 
   test(`that errorGettingUsers function should return
@@ -223,12 +228,12 @@ describe('userAction():', () => {
   });
 
   test('creates FINISH_GETTING_ALL_USERS when signing up user has been done',
-  () => {
+  (done) => {
     const users = [{ name: 'jackson',
       email: 'jackson@gmail.com',
       roleValue: 'Admin' }];
     const offset = 0;
-    const token = 'sdfseflsfkjifsejfeis';
+    const token = localStorage.getItem('docmanagertoken');
     const response = { token,
       roleType: 'Learning',
       users,
@@ -237,6 +242,40 @@ describe('userAction():', () => {
       pageNumber: 1 };
     moxios
     .stubRequest(`/api/v1/users?&offset=${offset}&limit=8&token=${token}`, {
+      status: 200,
+      data: response,
+    });
+
+    const expectedActions = [
+      { type: types.START_GETTING_ALL_USERS, },
+      { type: types.FINISH_GETTING_ALL_USERS,
+        users,
+        responseStatus: 'successful',
+        count: 2,
+        pageNumber: 1, }
+    ];
+    const store = mockStore({});
+    store.dispatch(userAction.fetchAllUsers(offset, 1)).then(() => {
+      // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+    done();
+  });
+
+  test('creates FINISH_GETTING_ALL_USERS when no offset value is passed',
+  (done) => {
+    const users = [{ name: 'jackson',
+      email: 'jackson@gmail.com',
+      roleValue: 'Admin' }];
+    const token = localStorage.getItem('docmanagertoken');
+    const response = { token,
+      roleType: 'Learning',
+      users,
+      status: 'successful',
+      count: 2,
+      pageNumber: 1 };
+    moxios
+    .stubRequest(`/api/v1/users?&offset=0&limit=8&token=${token}`, {
       status: 200,
       response,
     });
@@ -250,10 +289,11 @@ describe('userAction():', () => {
         pageNumber: 1, }
     ];
     const store = mockStore({ users: [] });
-    store.dispatch(userAction.fetchAllUsers(offset, 1)).then(() => {
+    store.dispatch(userAction.fetchAllUsers(undefined, 1)).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
+    done();
   });
 
   test(`that changeInputValue function should return
@@ -268,9 +308,9 @@ describe('userAction():', () => {
   });
 
   test('creates FINISH_GETTING_ALL_USERS when error occurred',
-  () => {
+  (done) => {
     const offset = 0;
-    const token = 'sdfseflsfkjifsejfeis';
+    const token = localStorage.getItem('docmanagertoken');
     const response = { token,
       roleType: 'Learning',
       message: 'Access denied!',
@@ -286,7 +326,7 @@ describe('userAction():', () => {
     const expectedActions = [
       { type: types.START_GETTING_ALL_USERS, },
       { type: types.ERROR_GETTING_ALL_USERS,
-        error: 'Access denied',
+        error: 'Access denied!',
         responseStatus: 'unsuccessful', }
     ];
     const store = mockStore({ users: [] });
@@ -294,6 +334,7 @@ describe('userAction():', () => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });
+    done();
   });
 
   test(`that updatingUser function should return
@@ -328,7 +369,7 @@ describe('userAction():', () => {
     const userDetail = { name: 'jackson',
       email: 'jackson@gmail.com',
       roleValue: 'Admin' };
-    const token = 'sdfseflsfkjifsejfeis';
+    const token = localStorage.getItem('docmanagertoken');
     const response = {
       status: 'successful' };
     moxios
@@ -354,13 +395,12 @@ describe('userAction():', () => {
     const userDetail = { name: 'jackson',
       email: 'jackson@gmail.com',
       roleValue: 'Admin' };
-    const offset = 0;
-    const token = 'sdfseflsfkjifsejfeis';
+    const token = localStorage.getItem('docmanagertoken');
     const response = {
       status: 'successful',
       message: 'No user found!' };
     moxios
-    .stubRequest(`/api/v1/users?&offset=${offset}&limit=8&token=${token}`, {
+    .stubRequest(`/api/v1/users/1?token=${token}`, {
       status: 400,
       response,
     });
@@ -408,7 +448,7 @@ describe('userAction():', () => {
   test('creates DONE_DEACTIVATING_USER when signing up user has been done',
   () => {
     const userId = 1;
-    const token = 'sdfseflsfkjifsejfeis';
+    const token = localStorage.getItem('docmanagertoken');
     const response = {
       status: 'successful',
       message: 'No user found!' };
@@ -420,7 +460,7 @@ describe('userAction():', () => {
     const expectedActions = [
       {
         type: types.DONE_DEACTIVATING_USER,
-        status: 200,
+        status: response.status,
         userId,
       }
     ];
@@ -435,7 +475,7 @@ describe('userAction():', () => {
   occurred while signing up user`,
   () => {
     const userId = 1;
-    const token = 'sdfseflsfkjifsejfeis';
+    const token = localStorage.getItem('docmanagertoken');
     const response = {
       status: 'successful',
       message: 'No user found!' };

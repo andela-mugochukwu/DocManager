@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The CreateDocument component: should render correctly 1`] = `
+<form
+  action=""
+  id="form"
+>
+  <div
+    id="docform"
+  >
+    <input
+      name="title"
+      placeholder="title"
+      type="text"
+    />
+    <TinyMCE
+      config={
+        Object {
+          "browser_spellcheck": true,
+          "height": 280,
+          "plugins": "autolink link image lists print preview",
+          "toolbar": "undo redo | bold italic | alignleft aligncenter alignright",
+          "width": "100%",
+        }
+      }
+      content=""
+      onChange={[Function]}
+    />
+    <br />
+    <div>
+      Access level:
+      <input
+        className="with-gap"
+        id="public"
+        name="group1"
+        type="radio"
+        value="Public"
+      />
+      <label
+        htmlFor="public"
+      >
+        Public
+      </label>
+      <input
+        className="with-gap"
+        id="role"
+        name="group1"
+        type="radio"
+        value="Learning"
+      />
+      <label
+        htmlFor="role"
+      >
+        Learning
+      </label>
+      <input
+        className="with-gap"
+        id="private"
+        name="group1"
+        type="radio"
+        value="Private"
+      />
+      <label
+        htmlFor="private"
+      >
+        Private
+      </label>
+      <button
+        className="btn waves-effect waves-light right"
+        name="action"
+        onClick={[Function]}
+        type="submit"
+      >
+        create
+      </button>
+    </div>
+  </div>
+</form>
+`;

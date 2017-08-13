@@ -5,23 +5,33 @@ import Alert from 'sweetalert2';
 import TinyMCE from 'react-tinymce';
 
 let documentBody = '';
+
 /**
- *
- * @param {object} event - contains information
- * about the element raising the event
- * @param {*} documentCreation - a function that handles
- * the event to create documents
- * @param {*} userId - the user Id creating the document
- * @return {null} returns null
+ * Creates a document object from the form
+ * @param {number} userId - the userId that creating the document
+ * @return {object} returns the form value to use in creting the document
  */
-const createDocument = (event, documentCreation, userId) => {
-  event.preventDefault();
+const setFormValue = (userId) => {
   const title = $('#docform input[name=title]').val();
   const body = documentBody;
   const access = $('#docform input[name=group1]:checked').val();
   const token = localStorage.getItem('docmanagertoken');
   const formValue = { title, body, access, userId, token };
-  if (token && title !== '' && body !== '') {
+  return formValue;
+};
+
+/**
+ * Submits a completed form to create a document
+ * @param {object} event - contains information
+ * about the element raising the event
+ * @param {func} documentCreation - a function that handles
+ * the event to create documents
+ * @param {object} formValue - the value of the form used to create document
+ * @return {null} returns null
+ */
+const createDocument = (event, documentCreation, formValue) => {
+  event.preventDefault();
+  if (formValue.token && formValue.title !== '' && formValue.body !== '') {
     documentCreation(formValue).then((res) => {
       if (res.status === 'successful') {
         Alert({
@@ -105,7 +115,8 @@ const CreateDocument = ({ documentCreation, userId, roleType }) => (
           type="submit"
           name="action"
           onClick={(event) => {
-            createDocument(event, documentCreation, userId);
+            const formValue = setFormValue(userId);
+            createDocument(event, documentCreation, formValue);
           }}
         >create
     </button>

@@ -1,0 +1,580 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Authenticate component: should render correctly 1`] = `
+<Authenticate
+  allDocuments={[Function]}
+  history={
+    Object {
+      "push": [Function],
+    }
+  }
+  roleType="Learning"
+  signInUser={[Function]}
+  signUserUp={[Function]}
+  submitButton="submit"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+      id="authbuttons"
+    >
+      <div
+        className="col s6"
+      >
+        <span
+          className="a center-align waves-effect waves-light homebtncolor"
+          href="/"
+          id="signinbtn"
+          onClick={[Function]}
+        >
+          SignIn
+        </span>
+      </div>
+      <div
+        className="col s6"
+      >
+        <span
+          className="a center-align waves-effect waves-light btn"
+          href="/"
+          id="signupbtn"
+          onClick={[Function]}
+        >
+          SignUp
+        </span>
+      </div>
+    </div>
+    <div
+      id="authform"
+    >
+      <SigninForm
+        allDocuments={[Function]}
+        history={
+          Object {
+            "push": [Function],
+          }
+        }
+        roleType="Learning"
+        signInButtonText="submit"
+        signInUser={[Function]}
+        submitButton="submit"
+      >
+        <div
+          className=""
+          id="signinform"
+        >
+          <input
+            className="forminput"
+            placeholder="Username"
+            type="text"
+          />
+          <input
+            className="forminput"
+            placeholder="Password"
+            type="password"
+          />
+          <button
+            className="center-align waves-effect waves-light btn"
+            id="signinbtn"
+            onClick={[Function]}
+          >
+            submit
+          </button>
+        </div>
+      </SigninForm>
+      <SignupForm
+        allDocuments={[Function]}
+        history={
+          Object {
+            "push": [Function],
+          }
+        }
+        roleType="Learning"
+        signUpButtonText="submit"
+        signUserUp={[Function]}
+        submitButton="submit"
+      >
+        <div
+          id="signupform"
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+        >
+          <input
+            className="forminput"
+            minLength="3"
+            name="username"
+            placeholder="Username"
+            required={true}
+            type="text"
+          />
+          <input
+            className="forminput"
+            minLength="10"
+            name="email"
+            placeholder="Email"
+            required={true}
+            type="email"
+          />
+          <input
+            className="forminput"
+            minLength="6"
+            name="password"
+            placeholder="Password"
+            required={true}
+            type="password"
+          />
+          <input
+            className="forminput"
+            name="comfirmpassword"
+            placeholder="Comfirm password"
+            required={true}
+            type="password"
+          />
+          <div
+            id="roles"
+          >
+            Role:  
+            <input
+              className="with-gap"
+              data-value="Learning"
+              id="Learning"
+              name="group1"
+              type="radio"
+              value="3"
+            />
+            <label
+              htmlFor="Learning"
+            >
+              Learning
+            </label>
+            <input
+              className="with-gap"
+              data-value="Fellow"
+              id="Fellow"
+              name="group1"
+              type="radio"
+              value="2"
+            />
+            <label
+              htmlFor="Fellow"
+            >
+              Fellow
+            </label>
+            <input
+              className="with-gap"
+              data-value="DevOps"
+              id="DevOps"
+              name="group1"
+              type="radio"
+              value="4"
+            />
+            <label
+              htmlFor="DevOps"
+            >
+              DevOps
+            </label>
+            <br />
+          </div>
+          <button
+            className="center-align waves-effect waves-light btn"
+            id="signupbtn"
+            onClick={[Function]}
+          >
+            submit
+          </button>
+        </div>
+      </SignupForm>
+    </div>
+  </div>
+</Authenticate>
+`;
+
+exports[`The Authenticate component: should show signin form when signinbtn is clicked 1`] = `
+<Authenticate
+  allDocuments={[Function]}
+  history={
+    Object {
+      "push": [Function],
+    }
+  }
+  roleType="Learning"
+  signInUser={[Function]}
+  signUserUp={[Function]}
+  submitButton="submit"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+      id="authbuttons"
+    >
+      <div
+        className="col s6"
+      >
+        <span
+          className="a center-align waves-effect waves-light homebtncolor"
+          href="/"
+          id="signinbtn"
+          onClick={[Function]}
+        >
+          SignIn
+        </span>
+      </div>
+      <div
+        className="col s6"
+      >
+        <span
+          className="a center-align waves-effect waves-light btn"
+          href="/"
+          id="signupbtn"
+          onClick={[Function]}
+        >
+          SignUp
+        </span>
+      </div>
+    </div>
+    <div
+      id="authform"
+    >
+      <SigninForm
+        allDocuments={[Function]}
+        history={
+          Object {
+            "push": [Function],
+          }
+        }
+        roleType="Learning"
+        signInButtonText="submit"
+        signInUser={[Function]}
+        submitButton="submit"
+      >
+        <div
+          className=""
+          id="signinform"
+        >
+          <input
+            className="forminput"
+            placeholder="Username"
+            type="text"
+          />
+          <input
+            className="forminput"
+            placeholder="Password"
+            type="password"
+          />
+          <button
+            className="center-align waves-effect waves-light btn"
+            id="signinbtn"
+            onClick={[Function]}
+          >
+            submit
+          </button>
+        </div>
+      </SigninForm>
+      <SignupForm
+        allDocuments={[Function]}
+        history={
+          Object {
+            "push": [Function],
+          }
+        }
+        roleType="Learning"
+        signUpButtonText="submit"
+        signUserUp={[Function]}
+        submitButton="submit"
+      >
+        <div
+          id="signupform"
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+        >
+          <input
+            className="forminput"
+            minLength="3"
+            name="username"
+            placeholder="Username"
+            required={true}
+            type="text"
+          />
+          <input
+            className="forminput"
+            minLength="10"
+            name="email"
+            placeholder="Email"
+            required={true}
+            type="email"
+          />
+          <input
+            className="forminput"
+            minLength="6"
+            name="password"
+            placeholder="Password"
+            required={true}
+            type="password"
+          />
+          <input
+            className="forminput"
+            name="comfirmpassword"
+            placeholder="Comfirm password"
+            required={true}
+            type="password"
+          />
+          <div
+            id="roles"
+          >
+            Role:  
+            <input
+              className="with-gap"
+              data-value="Learning"
+              id="Learning"
+              name="group1"
+              type="radio"
+              value="3"
+            />
+            <label
+              htmlFor="Learning"
+            >
+              Learning
+            </label>
+            <input
+              className="with-gap"
+              data-value="Fellow"
+              id="Fellow"
+              name="group1"
+              type="radio"
+              value="2"
+            />
+            <label
+              htmlFor="Fellow"
+            >
+              Fellow
+            </label>
+            <input
+              className="with-gap"
+              data-value="DevOps"
+              id="DevOps"
+              name="group1"
+              type="radio"
+              value="4"
+            />
+            <label
+              htmlFor="DevOps"
+            >
+              DevOps
+            </label>
+            <br />
+          </div>
+          <button
+            className="center-align waves-effect waves-light btn"
+            id="signupbtn"
+            onClick={[Function]}
+          >
+            submit
+          </button>
+        </div>
+      </SignupForm>
+    </div>
+  </div>
+</Authenticate>
+`;
+
+exports[`The Authenticate component: should show signup form when signupbtn is clicked 1`] = `
+<Authenticate
+  allDocuments={[Function]}
+  history={
+    Object {
+      "push": [Function],
+    }
+  }
+  roleType="Learning"
+  signInUser={[Function]}
+  signUserUp={[Function]}
+  submitButton="submit"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+      id="authbuttons"
+    >
+      <div
+        className="col s6"
+      >
+        <span
+          className="a center-align waves-effect waves-light homebtncolor"
+          href="/"
+          id="signinbtn"
+          onClick={[Function]}
+        >
+          SignIn
+        </span>
+      </div>
+      <div
+        className="col s6"
+      >
+        <span
+          className="a center-align waves-effect waves-light btn"
+          href="/"
+          id="signupbtn"
+          onClick={[Function]}
+        >
+          SignUp
+        </span>
+      </div>
+    </div>
+    <div
+      id="authform"
+    >
+      <SigninForm
+        allDocuments={[Function]}
+        history={
+          Object {
+            "push": [Function],
+          }
+        }
+        roleType="Learning"
+        signInButtonText="submit"
+        signInUser={[Function]}
+        submitButton="submit"
+      >
+        <div
+          className=""
+          id="signinform"
+        >
+          <input
+            className="forminput"
+            placeholder="Username"
+            type="text"
+          />
+          <input
+            className="forminput"
+            placeholder="Password"
+            type="password"
+          />
+          <button
+            className="center-align waves-effect waves-light btn"
+            id="signinbtn"
+            onClick={[Function]}
+          >
+            submit
+          </button>
+        </div>
+      </SigninForm>
+      <SignupForm
+        allDocuments={[Function]}
+        history={
+          Object {
+            "push": [Function],
+          }
+        }
+        roleType="Learning"
+        signUpButtonText="submit"
+        signUserUp={[Function]}
+        submitButton="submit"
+      >
+        <div
+          id="signupform"
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+        >
+          <input
+            className="forminput"
+            minLength="3"
+            name="username"
+            placeholder="Username"
+            required={true}
+            type="text"
+          />
+          <input
+            className="forminput"
+            minLength="10"
+            name="email"
+            placeholder="Email"
+            required={true}
+            type="email"
+          />
+          <input
+            className="forminput"
+            minLength="6"
+            name="password"
+            placeholder="Password"
+            required={true}
+            type="password"
+          />
+          <input
+            className="forminput"
+            name="comfirmpassword"
+            placeholder="Comfirm password"
+            required={true}
+            type="password"
+          />
+          <div
+            id="roles"
+          >
+            Role:  
+            <input
+              className="with-gap"
+              data-value="Learning"
+              id="Learning"
+              name="group1"
+              type="radio"
+              value="3"
+            />
+            <label
+              htmlFor="Learning"
+            >
+              Learning
+            </label>
+            <input
+              className="with-gap"
+              data-value="Fellow"
+              id="Fellow"
+              name="group1"
+              type="radio"
+              value="2"
+            />
+            <label
+              htmlFor="Fellow"
+            >
+              Fellow
+            </label>
+            <input
+              className="with-gap"
+              data-value="DevOps"
+              id="DevOps"
+              name="group1"
+              type="radio"
+              value="4"
+            />
+            <label
+              htmlFor="DevOps"
+            >
+              DevOps
+            </label>
+            <br />
+          </div>
+          <button
+            className="center-align waves-effect waves-light btn"
+            id="signupbtn"
+            onClick={[Function]}
+          >
+            submit
+          </button>
+        </div>
+      </SignupForm>
+    </div>
+  </div>
+</Authenticate>
+`;

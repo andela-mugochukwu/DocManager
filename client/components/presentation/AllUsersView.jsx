@@ -47,6 +47,7 @@ const AllUsersView = ({ allUsers, responseStatus, error,
       </td>
       <td>
         <button
+          id="useractionbtn"
           onClick={(event) => {
             event.preventDefault();
             Alert({

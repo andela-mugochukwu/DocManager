@@ -1,5 +1,112 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`The signupform component: should alert an error message when signup fails 1`] = `
+<SignupForm
+  allDocuments={[Function]}
+  history={
+    Object {
+      "push": [Function],
+    }
+  }
+  roleType="Admin"
+  signUserUp={[Function]}
+  submitButton="submit"
+>
+  <div
+    id="signupform"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <input
+      className="forminput"
+      minLength="3"
+      name="username"
+      placeholder="Username"
+      required={true}
+      type="text"
+    />
+    <input
+      className="forminput"
+      minLength="10"
+      name="email"
+      placeholder="Email"
+      required={true}
+      type="email"
+    />
+    <input
+      className="forminput"
+      minLength="6"
+      name="password"
+      placeholder="Password"
+      required={true}
+      type="password"
+    />
+    <input
+      className="forminput"
+      name="comfirmpassword"
+      placeholder="Comfirm password"
+      required={true}
+      type="password"
+    />
+    <div
+      id="roles"
+    >
+      Role:  
+      <input
+        className="with-gap"
+        data-value="Learning"
+        id="Learning"
+        name="group1"
+        type="radio"
+        value="3"
+      />
+      <label
+        htmlFor="Learning"
+      >
+        Learning
+      </label>
+      <input
+        className="with-gap"
+        data-value="Fellow"
+        id="Fellow"
+        name="group1"
+        type="radio"
+        value="2"
+      />
+      <label
+        htmlFor="Fellow"
+      >
+        Fellow
+      </label>
+      <input
+        className="with-gap"
+        data-value="DevOps"
+        id="DevOps"
+        name="group1"
+        type="radio"
+        value="4"
+      />
+      <label
+        htmlFor="DevOps"
+      >
+        DevOps
+      </label>
+      <br />
+    </div>
+    <button
+      className="center-align waves-effect waves-light btn"
+      id="signupbtn"
+      onClick={[Function]}
+    >
+      submit
+    </button>
+  </div>
+</SignupForm>
+`;
+
 exports[`The signupform component: should render the signup form correctly 1`] = `
 <div
   id="signupform"

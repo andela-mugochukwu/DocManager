@@ -21,10 +21,19 @@ const routes = (router) => {
   router.post('/users/login', signInValidation, Users.signIn);
 
   router.use(verifyToken);
-  // Update a specific user
-  router.put('/users/:id', Users.update);
   // route to create role
   router.post('/role', isSuperAdmin, Roles.create);
+  // Update a specific role
+  router.put('/role/:id', isSuperAdmin, Roles.edit);
+  // Deletes a specific role
+  router.delete('/role/:id', isSuperAdmin, Roles.delete);
+  // route to find a specific role
+  router.get('/role/:id', isAdmin, Roles.find);
+  // route to get all roles
+  router.get('/roles', isAdmin, Roles.getAll);
+
+  // Update a specific user
+  router.put('/users/:id', Users.update);
   // Find a specific user
   router.get('/users/:userId', Users.viewProfile);
   // route to get all users and paginate them
@@ -34,8 +43,8 @@ const routes = (router) => {
   // route to search for users
   router.get('/search/users', isAdmin, Users.find);
   // route to fetch documents belonging to a user
-  // router.get('/users/:id/documents', getUserDocuments);
   router.get('/users/:id/documents', Documents.getUserDocuments);
+
   // route to search for documents
   router.get('/search/documents', Documents.search);
   // route to find a specific document
@@ -48,7 +57,6 @@ const routes = (router) => {
   router.post('/documents', Documents.create);
   // route to update a specific document
   router.put('/documents/:id', Documents.update);
-
   // route to delete a specific document
   router.delete('/documents/:id', Documents.delete);
 };

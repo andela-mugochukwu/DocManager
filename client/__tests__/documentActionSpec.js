@@ -50,12 +50,10 @@ describe('documentAction():', () => {
       body: 'Hie',
       access:
       'Pubic' };
-    const userId = 1;
-    const token = 'sdfseflsfkjifsejfeis';
     const response = {
       status: 'successful',
       message: 'No user found!' };
-    moxios.stubRequest(`/api/v1/users/${userId}?token=${token}`, {
+    moxios.stubRequest('/api/v1/documents', {
       status: 200,
       response,
     });
@@ -80,12 +78,10 @@ describe('documentAction():', () => {
       body: 'Hie',
       access:
       'Pubic' };
-    const userId = 1;
-    const token = 'sdfseflsfkjifsejfeis';
     const response = {
       status: 'successful',
       message: 'No user found!' };
-    moxios.stubRequest(`/api/v1/users/${userId}?token=${token}`, {
+    moxios.stubRequest('/api/v1/documents', {
       status: 400,
       response,
     });
@@ -131,37 +127,74 @@ describe('documentAction():', () => {
     expect(actionObject.type).toBe(types.ERROR_GET_USER_DOCUMENT);
   });
 
-  it(`creates SUCCESS_GET_USER_DOCUMENT when fetching
-    public documents has been done`,
+  it(`creates SUCCESS_GET_USER_DOCUMENT action when fetching
+    user documents has been done`,
   () => {
-    const formValue = { userId: 1,
-      documentId: 2,
+    const formValue = { id: 1,
+      userId: 1,
       title: 'hello',
       body: 'Hie',
       access:
       'Pubic' };
-    const token = 'sdfseflsfkjifsejfeis';
-    const response = { data: {
+    const token = localStorage.getItem('docmanagertoken');
+    const response = {
       status: 'successful',
       count: 1,
-      documents: [formValue] } };
-    nock('http://example.com/')
-      .get(`/api/v1/users/1/documents?&offset=0&limit=8&token=${token}`)
-      .reply(200, response);
+      documents: [formValue] };
+    moxios
+    .stubRequest(`/api/v1/users/1/documents?&offset=0&limit=8&token=${token}`,
+      {
+        status: 200,
+        response,
+      });
 
     const expectedActions = [
       { type: types.START_GET_USER_DOCUMENT, },
       { type: types.SUCCESS_GET_USER_DOCUMENT,
-        documents: response.data.documents,
-        count: response.data.count, },
+        documents: response.documents,
+        count: response.count, },
     ];
-    const store = mockStore({ documents: [] });
-    return store.dispatch(documentAction.getUserDocuments(formValue.userId))
+    const store = mockStore({ documents: {} });
+    store.dispatch(documentAction.getUserDocuments(formValue.userId))
       .then(() => {
       // return of async actions
         expect(store.getActions()).toEqual(expectedActions);
       });
   });
+
+  it(`creates ERROR_GET_USER_DOCUMENT action when an error
+  occured while fetching
+  user documents`,
+() => {
+  const formValue = { id: 1,
+    userId: 1,
+    title: 'hello',
+    body: 'Hie',
+    access:
+    'Pubic' };
+  const token = localStorage.getItem('docmanagertoken');
+  const response = {
+    status: 'successful',
+    message: 'error occurred!' };
+  moxios
+  .stubRequest(`/api/v1/users/1/documents?&offset=0&limit=8&token=${token}`,
+    {
+      status: 400,
+      data: response,
+    });
+
+  const expectedActions = [
+    { type: types.START_GET_USER_DOCUMENT, },
+    { type: types.ERROR_GET_USER_DOCUMENT,
+      error: response.data },
+  ];
+  const store = mockStore({ documents: {} });
+  store.dispatch(documentAction.getUserDocuments(formValue.userId))
+    .then(() => {
+    // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+});
 
   test(`that fetchingPublicDocuments function should return
     the correct action object`, () => {
@@ -195,35 +228,71 @@ describe('documentAction():', () => {
 
   it(`creates DONE_FETCHING_PUBLIC_DOCUMENTS when fetching
     public documents has been done`,
-  () => {
+  (done) => {
     const formValue = { userId: 1,
       documentId: 2,
       title: 'hello',
       body: 'Hie',
       access:
       'Pubic' };
-    const token = 'sdfseflsfkjifsejfeis';
-    const response = { data: {
+    const token = localStorage.getItem('docmanagertoken');
+    const response = {
       status: 'successful',
+      message: '',
       count: 1,
-      documents: [formValue] } };
-    nock('http://example.com/')
-      .get(`/api/v1/documents/Public?&offset=0&limit=8&token=${token}`)
-      .reply(200, response);
+      documents: [formValue],
+      curPage: 1,
+      pageCount: 1,
+      pageSize: 1, };
+    moxios
+    .stubRequest(`/api/v1/documents/Public?&offset=0&limit=8&token=${token}`,
+      {
+        status: 200,
+        response,
+      });
 
     const expectedActions = [
       { type: types.START_FETCHING_PUBLIC_DOCUMENTS, },
       { type: types.DONE_FETCHING_PUBLIC_DOCUMENTS,
-        documents: response.data.documents,
-        count: response.data.count, },
+        documents: [formValue],
+        count: 1, },
     ];
     const store = mockStore({ documents: [] });
-    return store.dispatch(documentAction.publicDocuments())
+    store.dispatch(documentAction.publicDocuments())
       .then(() => {
       // return of async actions
         expect(store.getActions()).toEqual(expectedActions);
       });
+    done();
   });
+
+  it(`creates ERROR_FETCHING_PUBLIC_DOCUMENTS when fetching
+  public documents resulted in an error`,
+(done) => {
+  const token = localStorage.getItem('docmanagertoken');
+  const response = {
+    status: 'unsuccessful',
+    message: '', };
+  moxios
+  .stubRequest(`/api/v1/documents/Public?&offset=0&limit=8&token=${token}`,
+    {
+      status: 400,
+      response,
+    });
+
+  const expectedActions = [
+    { type: types.START_FETCHING_PUBLIC_DOCUMENTS, },
+    { type: types.ERROR_FETCHING_PUBLIC_DOCUMENTS,
+      error: response.message },
+  ];
+  const store = mockStore({ documents: [] });
+  store.dispatch(documentAction.publicDocuments())
+    .then(() => {
+    // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  done();
+});
 
   test(`that fetchRoleDocuments function should return
     the correct action object`, () => {
@@ -263,35 +332,66 @@ describe('documentAction():', () => {
     'Learning' documents has been done`,
   () => {
     const formValue = { userId: 1,
-      documentId: 2,
+      id: 1,
       title: 'hello',
       body: 'Hie',
       access:
       'Pubic' };
-    const token = 'sdfseflsfkjifsejfeis';
-    const response = { data: {
-      status: 'successful',
+    const roleType = 'Learning';
+    const token = localStorage.getItem('docmanagertoken');
+    const response = {
       count: 1,
-      documents: [formValue] } };
-    nock('http://example.com/')
-      .get(`/api/v1/documents/Learning?&offset=0&limit=8&token=${token}`)
-      .reply(200, response);
+      documents: [formValue], };
+    moxios
+    .stubRequest(`/api/v1/documents/${roleType}?&offset=0&limit=8&token=${token}`,
+      {
+        status: 200,
+        response,
+      });
 
     const expectedActions = [
       { type: types.START_FETCHING_ROLE_DOCUMENTS,
-        roleType: 'Learning' || 'Loading...', },
+        roleType: 'Loading...', },
       { type: types.DONE_FETCHING_ROLE_DOCUMENTS,
-        documents: response.data.documents,
-        count: response.data.count,
+        documents: response.documents,
+        count: response.count,
         roleType: 'Learning' }
     ];
     const store = mockStore({ documents: [] });
-    return store.dispatch(documentAction.roleDocuments('Learning'))
+    store.dispatch(documentAction.roleDocuments(roleType))
       .then(() => {
       // return of async actions
         expect(store.getActions()).toEqual(expectedActions);
       });
   });
+
+  it(`creates ERROR_FETCHING_ROLE_DOCUMENTS when fetching
+  'Learning' documents failed`,
+() => {
+  const roleType = 'Learning';
+  const token = localStorage.getItem('docmanagertoken');
+  const response = {
+    message: 'an error occurred!' };
+  moxios
+  .stubRequest(`/api/v1/documents/${roleType}?&offset=0&limit=8&token=${token}`,
+    {
+      status: 400,
+      response,
+    });
+
+  const expectedActions = [
+    { type: types.START_FETCHING_ROLE_DOCUMENTS,
+      roleType: 'Loading...', },
+    { type: types.ERROR_FETCHING_ROLE_DOCUMENTS,
+      error: response.message }
+  ];
+  const store = mockStore({ documents: [] });
+  store.dispatch(documentAction.roleDocuments(roleType))
+    .then(() => {
+    // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+});
 
   test(`that fetchAllDocuments function should return
     the correct action object`, () => {
@@ -333,23 +433,87 @@ describe('documentAction():', () => {
       body: 'Hie',
       access:
       'Pubic' };
-    const token = 'sdfseflsfkjifsejfeis';
-    const response = { data: {
+    const token = localStorage.getItem('docmanagertoken');
+    const response = {
       status: 'successful',
       count: 1,
-      documents: [formValue] } };
-    nock('http://example.com/')
-      .get(`/api/v1/documents?&offset=0&limit=8&token=${token}`)
-      .reply(200, response);
+      documents: [formValue] };
+    moxios
+      .stubRequest(`/api/v1/documents?&offset=0&limit=8&token=${token}`,
+      {
+        status: 200,
+        response,
+      });
 
     const expectedActions = [
       { type: types.START_FETCHING_ALL_DOCUMENTS, },
       { type: types.DONE_FETCHING_ALL_DOCUMENTS,
-        documents: response.data.documents,
-        count: response.data.count, }
+        documents: [formValue],
+        count: 1, }
     ];
     const store = mockStore({ documents: [] });
-    return store.dispatch(documentAction.allDocuments('Learning'))
+    store.dispatch(documentAction.allDocuments('Learning'))
+      .then(() => {
+      // return of async actions
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it(`creates DONE_FETCHING_ALL_DOCUMENTS when
+  an Admin fetches all documents`,
+() => {
+  const formValue = { userId: 1,
+    documentId: 2,
+    title: 'hello',
+    body: 'Hie',
+    access:
+    'Pubic' };
+  const token = localStorage.getItem('docmanagertoken');
+  const response = {
+    status: 'successful',
+    count: 1,
+    documents: [formValue] };
+  moxios
+    .stubRequest(`/api/v1/documents?&offset=0&limit=8&token=${token}`,
+    {
+      status: 200,
+      response,
+    });
+
+  const expectedActions = [
+    { type: types.START_FETCHING_ALL_DOCUMENTS, },
+    { type: types.DONE_FETCHING_ALL_DOCUMENTS,
+      documents: [formValue],
+      count: 1, }
+  ];
+  const store = mockStore({ documents: [] });
+  store.dispatch(documentAction.allDocuments('Admin'))
+    .then(() => {
+    // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+});
+
+  it(`creates ERROR_FETCHING_ALL_DOCUMENTS when error occurred while fetching
+  all documents accessible to a user`,
+  () => {
+    const token = localStorage.getItem('docmanagertoken');
+    const response = {
+      message: 'An error occurred!' };
+    moxios
+      .stubRequest(`/api/v1/documents?&offset=0&limit=8&token=${token}`,
+      {
+        status: 400,
+        data: response,
+      });
+
+    const expectedActions = [
+      { type: types.START_FETCHING_ALL_DOCUMENTS, },
+      { type: types.ERROR_FETCHING_ALL_DOCUMENTS,
+        error: response.message }
+    ];
+    const store = mockStore({});
+    store.dispatch(documentAction.allDocuments('Learning'))
       .then(() => {
       // return of async actions
         expect(store.getActions()).toEqual(expectedActions);
@@ -391,34 +555,63 @@ describe('documentAction():', () => {
     a particular document a user has access to has been done`,
   () => {
     const formValue = { userId: 1,
-      documentId: 2,
+      id: 2,
       title: 'hello',
       body: 'Hie',
       access:
       'Pubic' };
-    const token = 'sdfseflsfkjifsejfeis';
-    const response = { data: {
+    const token = localStorage.getItem('docmanagertoken');
+    const response = {
       status: 'successful',
-      count: 1,
-      documents: [formValue],
-      message: 'An error occurred while reading your document' } };
-    nock('http://example.com/')
-      .get(`/api/v1/document/2?offset=0&limit=8&token=${token}`)
-      .reply(200, response);
+      document: formValue,
+      message: 'An error occurred while reading your document' };
+    moxios
+      .stubRequest(`/api/v1/document/2?offset=0&limit=8&token=${token}`,
+      {
+        status: 200,
+        response,
+      });
 
     const expectedActions = [
       { type: types.START_READING_DOCUMENT,
         docId: 2 },
       { type: types.DONE_READING_DOCUMENT,
-        document: response.data.documents[0], }
+        document: response.document, }
     ];
     const store = mockStore({ document: {} });
-    return store.dispatch(documentAction.readDocument(2))
+    store.dispatch(documentAction.readDocument(2))
       .then(() => {
       // return of async actions
         expect(store.getActions()).toEqual(expectedActions);
       });
   });
+
+  it(`creates ERROR_READING_DOCUMENT when reading
+  a particular document fails`,
+() => {
+  const token = localStorage.getItem('docmanagertoken');
+  moxios
+    .stubRequest(`/api/v1/document/2?offset=0&limit=8&token=${token}`,
+    {
+      status: 400,
+      response: { message: 'Access denied!' },
+    });
+
+  const expectedActions = [
+    { type: types.START_READING_DOCUMENT,
+      docId: 2 },
+    {
+      type: types.ERROR_READING_DOCUMENT,
+      error: 'Access denied!',
+    }
+  ];
+  const store = mockStore({ document: {} });
+  store.dispatch(documentAction.readDocument(2))
+    .then(() => {
+    // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+});
 
   test(`that setTitleInputValue function should return
     the correct action object`, () => {
@@ -428,6 +621,19 @@ describe('documentAction():', () => {
       title: 'I love c#',
     });
   });
+
+  test(`creates UPDATE_TITLE when changing
+  the title of a document`,
+    () => {
+      const expectedActions = [
+        { type: types.UPDATE_TITLE,
+          title: 'Hello', }
+      ];
+      const store = mockStore({});
+      store.dispatch(documentAction
+        .changeTitleValue('Hello'));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
 
   test(`that startEditingDocument function should return
     the correct action object`, () => {
@@ -464,27 +670,63 @@ describe('documentAction():', () => {
       body: 'Hie',
       access:
       'Pubic' };
-    const token = 'sdfseflsfkjifsejfeis';
-    const response = { data: {
+    const token = localStorage.getItem('docmanagertoken');
+    const response = {
       status: 'successful',
       count: 1,
-      documents: [formValue] } };
-    nock('http://example.com/')
-      .put(`/api/v1/documents/2?token=${token}`)
-      .reply(200, response);
+      documents: [formValue] };
+    moxios
+      .stubRequest(`/api/v1/documents/2?token=${token}`,
+      {
+        status: 200,
+        response,
+      });
 
     const expectedActions = [
       { type: types.START_EDITING_DOCUMENT, },
       { type: types.DONE_EDITING_DOCUMENT,
-        documentId: response.data.documents[0].documentId, }
+        documentId: 2, }
     ];
-    const store = mockStore({ document: {} });
-    return store.dispatch(documentAction.editDocument(formValue, 2))
+    const store = mockStore({});
+    store.dispatch(documentAction.editDocument(formValue, 2))
       .then(() => {
       // return of async actions
         expect(store.getActions()).toEqual(expectedActions);
       });
   });
+
+  it(`creates ERROR_EDITING_DOCUMENT when fetching
+  all documents a user has access to has been done`,
+() => {
+  const formValue = { userId: 1,
+    documentId: 2,
+    title: 'hello',
+    body: 'Hie',
+    access:
+    'Pubic' };
+  const token = localStorage.getItem('docmanagertoken');
+  const response = {
+    status: 'successful',
+    count: 1,
+    documents: [formValue] };
+  moxios
+    .stubRequest(`/api/v1/documents/2?token=${token}`,
+    {
+      status: 400,
+      response,
+    });
+
+  const expectedActions = [
+    { type: types.START_EDITING_DOCUMENT, },
+    { type: types.ERROR_EDITING_DOCUMENT, }
+  ];
+  const store = mockStore({});
+  store.dispatch(documentAction.editDocument(formValue, 2))
+    .then(() => {
+    // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+});
 
   test(`that deleteDocumentStart function should return
     the correct action object`, () => {
@@ -514,6 +756,62 @@ describe('documentAction():', () => {
     });
   });
 
+  it('creates DONE_DELETING_DOCUMENT when deleting a document',
+(done) => {
+  const token = localStorage.getItem('docmanagertoken');
+  const response = {
+    message: 'delete successful', };
+  moxios
+    .stubRequest(`/api/v1/documents/2?&offset=0&limit=8&token=${token}`,
+    {
+      status: 200,
+      response,
+    });
+
+  const expectedActions = [
+    { type: types.START_DELETING_DOCUMENT,
+      docId: 2, },
+    { type: types.DONE_DELETING_DOCUMENT,
+      message: response.message,
+      docId: 2, }
+  ];
+  const store = mockStore({});
+  store.dispatch(documentAction.deleteDocument(2))
+    .then(() => {
+    // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  done();
+});
+
+  test(`creates ERROR_DELETING_DOCUMENT when error occurred while
+   deleting a document`,
+(done) => {
+  const token = localStorage.getItem('docmanagertoken');
+  const response = {
+    message: 'unsuccessful', };
+  moxios
+    .stubRequest(`/api/v1/documents/2?&offset=0&limit=8&token=${token}`,
+    {
+      status: 400,
+      response,
+    });
+
+  const expectedActions = [
+    { type: types.START_DELETING_DOCUMENT,
+      docId: 2, },
+    { type: types.ERROR_DELETING_DOCUMENT,
+      error: response.message, }
+  ];
+  const store = mockStore({});
+  store.dispatch(documentAction.deleteDocument(2))
+    .then(() => {
+    // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  done();
+});
+
   test(`that doneSearchingDocuments function should return
     the correct action object`, () => {
     const documents = [{ id: 1, title: 'Fish bone' },
@@ -538,6 +836,68 @@ describe('documentAction():', () => {
       error: 'No result found!',
     });
   });
+
+  test(`creates DONE_SEARCHING_DOCUMENTS when searching for
+  matched documents is complete`,
+    (done) => {
+      const token = localStorage.getItem('docmanagertoken');
+      const url = '/api/v1/search/documents?';
+      const response = {
+        count: 1,
+        documents: [{ userId: 1,
+          title: 'Hi',
+          body: 'Hello',
+          access: 'Private' }],
+        message: 'unsuccessful', };
+      moxios
+      .stubRequest(`${url}q=h&offset=0&limit=8&token=${token}`,
+        {
+          status: 200,
+          data: response,
+        });
+
+      const expectedActions = [
+        { type: types.DONE_SEARCHING_DOCUMENTS,
+          documents: response.documents,
+          count: response.count,
+          pageNumber: 1,
+          access: null }
+      ];
+      const store = mockStore({});
+      store.dispatch(documentAction.searchDocuments('h'))
+      .then(() => {
+      // return of async actions
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+      done();
+    });
+
+  test(`creates ERROR_SEARCHING_DOCUMENTS when searching for
+    matched documents fail`,
+      (done) => {
+        const token = localStorage.getItem('docmanagertoken');
+        const url = '/api/v1/search/documents?';
+        const response = {
+          message: 'unsuccessful', };
+        moxios
+        .stubRequest(`${url}q=h&offset=0&limit=8&token=${token}`,
+          {
+            status: 400,
+            response,
+          });
+
+        const expectedActions = [
+          { type: types.ERROR_SEARCHING_DOCUMENTS,
+            error: response.message, }
+        ];
+        const store = mockStore({});
+        store.dispatch(documentAction.searchDocuments('h'))
+        .then(() => {
+        // return of async actions
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+        done();
+      });
 
   test(`that paginationUrl function should return
     the correct url link when access is Private`, () => {
@@ -605,5 +965,67 @@ describe('documentAction():', () => {
     expect(actionObject)
     .toBe('/api/v1/search/documents?q=Hi&offset=0&limit=8&token=hsiejsilelia');
   });
-});
 
+  test(`creates DONE_SEARCHING_DOCUMENTS when paginating
+  after fetching documents`,
+    (done) => {
+      const url = documentAction.paginationUrl('Pubic', 1, 1, 'Learning', 'Hi');
+      const response = {
+        documents: [{ usesId: 1,
+          title: 'Hello',
+          body: 'Hi',
+          access: 'Public' }],
+        count: 1,
+        message: 'unsuccessful', };
+      moxios
+      .stubRequest(url,
+        {
+          status: 200,
+          data: response,
+        });
+
+      const expectedActions = [
+        { type: types.DONE_SEARCHING_DOCUMENTS,
+          documents: response.documents,
+          count: response.count,
+          pageNumber: 1,
+          access: response.access }
+      ];
+      const store = mockStore({});
+      store.dispatch(documentAction
+        .paginateDocument(1, 1, 'Pubic', 'Hi', 'Learning', 1))
+      .then(() => {
+      // return of async actions
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+      done();
+    });
+
+  test(`creates ERROR_SEARCHING_DOCUMENTS when error occurre
+    while paginating fetched documents`,
+      (done) => {
+        const url = documentAction
+        .paginationUrl('Pubic', 1, 1, 'Learning', 'Hi');
+        const response = {
+          message: 'unsuccessful', };
+        moxios
+        .stubRequest(url,
+          {
+            status: 400,
+            response,
+          });
+
+        const expectedActions = [
+          { type: types.ERROR_SEARCHING_DOCUMENTS,
+            error: response.message }
+        ];
+        const store = mockStore({});
+        store.dispatch(documentAction
+          .paginateDocument(1, 1, 'Pubic', 'Hi', 'Learning', 1))
+        .then(() => {
+        // return of async actions
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+        done();
+      });
+});

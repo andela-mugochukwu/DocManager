@@ -170,8 +170,26 @@ describe('fetchDocuments', () => {
         .toBe('Could not delete this document');
   });
 
+  test(`Should set access property of the state to empty string
+    when searching is complete without access property in the action`, () => {
+    action.type = types.DONE_SEARCHING_DOCUMENTS;
+    action.access = null;
+    action.count = 2;
+    action.pageNumber = 1;
+    action.documents = [{ id: 1, title: 'hi' },
+      { id: 2, title: 'hello' }];
+    expect(fetchDocuments(initialState, action).isReady)
+      .toBe(true);
+    expect(fetchDocuments(initialState, action).documentaccess)
+      .toBe('');
+    expect(fetchDocuments(initialState, action).currentPage)
+      .toBe(1);
+    expect(fetchDocuments(initialState, action).documentCounter)
+    .toBe(2);
+  });
+
   test(`Should set the application state correctly
-    when searching is complete`, () => {
+  when searching is complete`, () => {
     action.type = types.DONE_SEARCHING_DOCUMENTS;
     action.access = 'Public';
     action.count = 2;
@@ -291,6 +309,18 @@ describe('fetchDocuments', () => {
       .not.toBe(0);
     expect(fetchDocuments(initialState, action).documentCounter)
     .toBe(2);
+  });
+
+  test(`Should set the application state correctly
+  when error occurred while fetching all documents`, () => {
+    action.type = types.ERROR_FETCHING_ALL_DOCUMENTS;
+    action.error = 'No document found';
+    expect(fetchDocuments(initialState, action).isReady)
+      .toBe(false);
+    expect(fetchDocuments(initialState, action).documents.length)
+      .toBe(0);
+    expect(fetchDocuments(initialState, action).documentCounter)
+    .toBe(0);
   });
 
   test(`Should set the error message in the state property

@@ -6,8 +6,9 @@ import SigninForm from '../../components/presentation/SigninForm';
 
 describe('The signinform component:', () => {
   const history = { push: url => url };
+  const response = 'successful';
   const props = {
-    signInUser: jest.fn(() => Promise.resolve()),
+    signInUser: jest.fn(() => Promise.resolve(response)),
     allDocuments: jest.fn(() => Promise.resolve()),
     submitButton: 'submit',
     roleType: 'Admin',
@@ -15,21 +16,8 @@ describe('The signinform component:', () => {
   };
   const enzymeWrapper = mount(<SigninForm {...props} />);
   test('should render the signinform correctly', () => {
-    const res = {
-      status: 'successful',
-    };
-    const signInUser = jest.fn(() => Promise.resolve(res));
-    const allDocuments = jest.fn(() => Promise.resolve());
-    const submitButton = 'submit';
-    const roleType = 'Admin';
     const component = renderer.create(
-      <SigninForm
-        history={history}
-        signInUser={signInUser}
-        submitButton={submitButton}
-        roleType={roleType}
-        allDocuments={allDocuments}
-      />
+      <SigninForm {...props} />
   );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

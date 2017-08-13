@@ -1,5 +1,321 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`The ReadDocument component: should alert error message when editing document fails 1`] = `
+<div
+  className="container"
+  id="readdocument"
+>
+  <input
+    className="center-align"
+    disabled={true}
+    id="title"
+    onChange={[Function]}
+    type="text"
+    value="jackson goes to school"
+  />
+  <div
+    className=""
+    id="docbody"
+  >
+    I have a friend whose name is jackson
+  </div>
+  <br />
+  <div
+    className="hide"
+    id="docbodyedit"
+  >
+    <TinyMCE
+      config={
+        Object {
+          "browser_spellcheck": true,
+          "height": 280,
+          "plugins": "autolink link image lists print preview",
+          "toolbar": "undo redo | bold italic | alignleft aligncenter alignright",
+          "width": "100%",
+        }
+      }
+      content="I have a friend whose name is jackson"
+      onChange={[Function]}
+    />
+    <br />
+  </div>
+  <div>
+    <span>
+      Author: 
+      jackson
+    </span>
+    <br />
+    <span>
+      Modified: 
+      Invalid Date
+    </span>
+    <button
+      className="btn right"
+      onClick={[Function]}
+    >
+      back
+    </button>
+    <button
+      className="btn right"
+      id="editbtn"
+      onClick={[Function]}
+      style={
+        Object {
+          "display": "",
+        }
+      }
+    >
+      edit
+    </button>
+    <button
+      className="btn right hide"
+      id="submitbtn"
+      onClick={[Function]}
+    >
+      successful
+    </button>
+  </div>
+  <br />
+</div>
+`;
+
+exports[`The ReadDocument component: should display edit button when roleType is admin 1`] = `
+<div
+  className="container"
+  id="readdocument"
+>
+  <input
+    className="center-align"
+    disabled={true}
+    id="title"
+    onChange={[Function]}
+    type="text"
+    value="jackson goes to school"
+  />
+  <div
+    className=""
+    id="docbody"
+  >
+    I have a friend whose name is jackson
+  </div>
+  <br />
+  <div
+    className="hide"
+    id="docbodyedit"
+  >
+    <TinyMCE
+      config={
+        Object {
+          "browser_spellcheck": true,
+          "height": 280,
+          "plugins": "autolink link image lists print preview",
+          "toolbar": "undo redo | bold italic | alignleft aligncenter alignright",
+          "width": "100%",
+        }
+      }
+      content="I have a friend whose name is jackson"
+      onChange={[Function]}
+    />
+    <br />
+  </div>
+  <div>
+    <span>
+      Author: 
+      jackson
+    </span>
+    <br />
+    <span>
+      Modified: 
+      Invalid Date
+    </span>
+    <button
+      className="btn right"
+      onClick={[Function]}
+    >
+      back
+    </button>
+    <button
+      className="btn right"
+      id="editbtn"
+      onClick={[Function]}
+      style={
+        Object {
+          "display": "",
+        }
+      }
+    >
+      edit
+    </button>
+    <button
+      className="btn right hide"
+      id="submitbtn"
+      onClick={[Function]}
+    >
+      successful
+    </button>
+  </div>
+  <br />
+</div>
+`;
+
+exports[`The ReadDocument component: should display edit button when roleType is superadmin 1`] = `
+<div
+  className="container"
+  id="readdocument"
+>
+  <input
+    className="center-align"
+    disabled={true}
+    id="title"
+    onChange={[Function]}
+    type="text"
+    value="jackson goes to school"
+  />
+  <div
+    className=""
+    id="docbody"
+  >
+    I have a friend whose name is jackson
+  </div>
+  <br />
+  <div
+    className="hide"
+    id="docbodyedit"
+  >
+    <TinyMCE
+      config={
+        Object {
+          "browser_spellcheck": true,
+          "height": 280,
+          "plugins": "autolink link image lists print preview",
+          "toolbar": "undo redo | bold italic | alignleft aligncenter alignright",
+          "width": "100%",
+        }
+      }
+      content="I have a friend whose name is jackson"
+      onChange={[Function]}
+    />
+    <br />
+  </div>
+  <div>
+    <span>
+      Author: 
+      jackson
+    </span>
+    <br />
+    <span>
+      Modified: 
+      Invalid Date
+    </span>
+    <button
+      className="btn right"
+      onClick={[Function]}
+    >
+      back
+    </button>
+    <button
+      className="btn right"
+      id="editbtn"
+      onClick={[Function]}
+      style={
+        Object {
+          "display": "",
+        }
+      }
+    >
+      edit
+    </button>
+    <button
+      className="btn right hide"
+      id="submitbtn"
+      onClick={[Function]}
+    >
+      successful
+    </button>
+  </div>
+  <br />
+</div>
+`;
+
+exports[`The ReadDocument component: should display not edit button when roleType is Learning 1`] = `
+<div
+  className="container"
+  id="readdocument"
+>
+  <input
+    className="center-align"
+    disabled={true}
+    id="title"
+    onChange={[Function]}
+    type="text"
+    value="jackson goes to school"
+  />
+  <div
+    className=""
+    id="docbody"
+  >
+    I have a friend whose name is jackson
+  </div>
+  <br />
+  <div
+    className="hide"
+    id="docbodyedit"
+  >
+    <TinyMCE
+      config={
+        Object {
+          "browser_spellcheck": true,
+          "height": 280,
+          "plugins": "autolink link image lists print preview",
+          "toolbar": "undo redo | bold italic | alignleft aligncenter alignright",
+          "width": "100%",
+        }
+      }
+      content="I have a friend whose name is jackson"
+      onChange={[Function]}
+    />
+    <br />
+  </div>
+  <div>
+    <span>
+      Author: 
+      jackson
+    </span>
+    <br />
+    <span>
+      Modified: 
+      Invalid Date
+    </span>
+    <button
+      className="btn right"
+      onClick={[Function]}
+    >
+      back
+    </button>
+    <button
+      className="btn right"
+      id="editbtn"
+      onClick={[Function]}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      edit
+    </button>
+    <button
+      className="btn right hide"
+      id="submitbtn"
+      onClick={[Function]}
+    >
+      successful
+    </button>
+  </div>
+  <br />
+</div>
+`;
+
 exports[`The ReadDocument component: should render the ReadDocument component correctly 1`] = `
 <div
   className="container"

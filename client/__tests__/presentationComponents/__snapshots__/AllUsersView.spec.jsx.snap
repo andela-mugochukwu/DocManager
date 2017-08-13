@@ -1,0 +1,430 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The AllUsersView component: should button text to Activate when isactive prop is false 1`] = `
+<AllUsersView
+  allUsers={
+    Array [
+      Object {
+        "createdAt": "Sun Aug 13 2017 13:01:58 GMT+0100 (WAT)",
+        "email": "jackson@gmail.com",
+        "id": 1,
+        "isactive": false,
+        "roleId": 9,
+        "username": "jackson",
+      },
+    ]
+  }
+  counter={9}
+  currentPage={1}
+  deactivateUser={[Function]}
+  error="Access denied!"
+  fetchAllUsers={[Function]}
+  responseStatus="unsuccessful"
+>
+  <section>
+    <p>
+      Access denied!
+    </p>
+  </section>
+</AllUsersView>
+`;
+
+exports[`The AllUsersView component: should display roleType as Admin when roleId is 2 1`] = `
+<AllUsersView
+  allUsers={
+    Array [
+      Object {
+        "createdAt": "Sun Aug 13 2017 13:01:58 GMT+0100 (WAT)",
+        "email": "jackson@gmail.com",
+        "id": 1,
+        "isactive": true,
+        "roleId": 2,
+        "username": "jackson",
+      },
+    ]
+  }
+  counter={9}
+  currentPage={1}
+  deactivateUser={[Function]}
+  error="Access denied!"
+  fetchAllUsers={[Function]}
+  responseStatus="unsuccessful"
+>
+  <section>
+    <p>
+      Access denied!
+    </p>
+  </section>
+</AllUsersView>
+`;
+
+exports[`The AllUsersView component: should display roleType as Devops when roleId is 5 1`] = `
+<AllUsersView
+  allUsers={
+    Array [
+      Object {
+        "createdAt": "Sun Aug 13 2017 13:01:58 GMT+0100 (WAT)",
+        "email": "jackson@gmail.com",
+        "id": 1,
+        "isactive": true,
+        "roleId": 5,
+        "username": "jackson",
+      },
+    ]
+  }
+  counter={9}
+  currentPage={1}
+  deactivateUser={[Function]}
+  error="Access denied!"
+  fetchAllUsers={[Function]}
+  responseStatus="unsuccessful"
+>
+  <section>
+    <p>
+      Access denied!
+    </p>
+  </section>
+</AllUsersView>
+`;
+
+exports[`The AllUsersView component: should display roleType as Learning when roleId is 4 1`] = `
+<AllUsersView
+  allUsers={
+    Array [
+      Object {
+        "createdAt": "Sun Aug 13 2017 13:01:58 GMT+0100 (WAT)",
+        "email": "jackson@gmail.com",
+        "id": 1,
+        "isactive": true,
+        "roleId": 4,
+        "username": "jackson",
+      },
+    ]
+  }
+  counter={9}
+  currentPage={1}
+  deactivateUser={[Function]}
+  error="Access denied!"
+  fetchAllUsers={[Function]}
+  responseStatus="unsuccessful"
+>
+  <section>
+    <p>
+      Access denied!
+    </p>
+  </section>
+</AllUsersView>
+`;
+
+exports[`The AllUsersView component: should display roleType as SuperAdmin when roleId is 1 1`] = `
+<AllUsersView
+  allUsers={
+    Array [
+      Object {
+        "createdAt": "Sun Aug 13 2017 13:01:58 GMT+0100 (WAT)",
+        "email": "jackson@gmail.com",
+        "id": 1,
+        "isactive": true,
+        "roleId": 1,
+        "username": "jackson",
+      },
+    ]
+  }
+  counter={9}
+  currentPage={1}
+  deactivateUser={[Function]}
+  error="Access denied!"
+  fetchAllUsers={[Function]}
+  responseStatus="unsuccessful"
+>
+  <section>
+    <p>
+      Access denied!
+    </p>
+  </section>
+</AllUsersView>
+`;
+
+exports[`The AllUsersView component: should not display roleType when roleId is not btw 1 and 5 inclusive 1`] = `
+<AllUsersView
+  allUsers={
+    Array [
+      Object {
+        "createdAt": "Sun Aug 13 2017 13:01:58 GMT+0100 (WAT)",
+        "email": "jackson@gmail.com",
+        "id": 1,
+        "isactive": true,
+        "roleId": 9,
+        "username": "jackson",
+      },
+    ]
+  }
+  counter={9}
+  currentPage={1}
+  deactivateUser={[Function]}
+  error="Access denied!"
+  fetchAllUsers={[Function]}
+  responseStatus="unsuccessful"
+>
+  <section>
+    <p>
+      Access denied!
+    </p>
+  </section>
+</AllUsersView>
+`;
+
+exports[`The AllUsersView component: should render correctly 1`] = `
+<AllUsersView
+  allUsers={
+    Array [
+      Object {
+        "createdAt": "Sun Aug 13 2017 13:01:58 GMT+0100 (WAT)",
+        "email": "jackson@gmail.com",
+        "id": 1,
+        "isactive": true,
+        "roleId": 3,
+        "username": "jackson",
+      },
+    ]
+  }
+  counter={1}
+  currentPage={1}
+  deactivateUser={[Function]}
+  error="Access denied!"
+  fetchAllUsers={[Function]}
+  responseStatus="successful"
+>
+  <section>
+    <div
+      id="viewusers"
+    >
+      <table
+        className="table"
+      >
+        <thead>
+          <tr>
+            <th>
+              <span>
+                UserName
+              </span>
+            </th>
+            <th>
+              <span>
+                UserEmail
+              </span>
+            </th>
+            <th>
+              <span>
+                Department/Role
+              </span>
+            </th>
+            <th>
+              <span>
+                Registered on
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            id={1}
+          >
+            <td>
+              <span>
+                jackson
+              </span>
+            </td>
+            <td>
+              <span>
+                jackson@gmail.com
+              </span>
+            </td>
+            <td>
+              <span>
+                Fellow
+              </span>
+            </td>
+            <td>
+              <span>
+                Invalid Date
+              </span>
+            </td>
+            <td>
+              <button
+                id="useractionbtn"
+                onClick={[Function]}
+              >
+                Deactivate
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div
+        className="row hide"
+      >
+        <Pagination
+          activePage={1}
+          firstPageText="«"
+          innerClass="pagination"
+          itemsCountPerPage={8}
+          lastPageText="»"
+          nextPageText="⟩"
+          onChange={[Function]}
+          pageRangeDisplayed={5}
+          prevPageText="⟨"
+          totalItemsCount={1}
+        >
+          <ul
+            className="pagination"
+          >
+            <Page
+              activeClass="active"
+              disabledClass="disabled"
+              isActive={false}
+              isDisabled={true}
+              onClick={[Function]}
+              pageNumber={1}
+              pageText="«"
+            >
+              <li
+                className="disabled"
+                onClick={[Function]}
+              >
+                <a
+                  className=""
+                  href="#"
+                >
+                  «
+                </a>
+              </li>
+            </Page>
+            <Page
+              activeClass="active"
+              disabledClass="disabled"
+              isActive={false}
+              isDisabled={true}
+              onClick={[Function]}
+              pageNumber={0}
+              pageText="⟨"
+            >
+              <li
+                className="disabled"
+                onClick={[Function]}
+              >
+                <a
+                  className=""
+                  href="#"
+                >
+                  ⟨
+                </a>
+              </li>
+            </Page>
+            <Page
+              activeClass="active"
+              disabledClass="disabled"
+              isActive={false}
+              isDisabled={true}
+              onClick={[Function]}
+              pageNumber={2}
+              pageText="⟩"
+            >
+              <li
+                className="disabled"
+                onClick={[Function]}
+              >
+                <a
+                  className=""
+                  href="#"
+                >
+                  ⟩
+                </a>
+              </li>
+            </Page>
+            <Page
+              activeClass="active"
+              disabledClass="disabled"
+              isActive={false}
+              isDisabled={true}
+              onClick={[Function]}
+              pageNumber={1}
+              pageText="»"
+            >
+              <li
+                className="disabled"
+                onClick={[Function]}
+              >
+                <a
+                  className=""
+                  href="#"
+                >
+                  »
+                </a>
+              </li>
+            </Page>
+          </ul>
+        </Pagination>
+      </div>
+    </div>
+  </section>
+</AllUsersView>
+`;
+
+exports[`The AllUsersView component: should render error message when responseStatus is unsuccessful 1`] = `
+<AllUsersView
+  allUsers={
+    Array [
+      Object {
+        "createdAt": "Sun Aug 13 2017 13:01:58 GMT+0100 (WAT)",
+        "email": "jackson@gmail.com",
+        "id": 1,
+        "isactive": true,
+        "roleId": 3,
+        "username": "jackson",
+      },
+    ]
+  }
+  counter={1}
+  currentPage={1}
+  deactivateUser={[Function]}
+  error="Access denied!"
+  fetchAllUsers={[Function]}
+  responseStatus="unsuccessful"
+>
+  <section>
+    <p>
+      Access denied!
+    </p>
+  </section>
+</AllUsersView>
+`;
+
+exports[`The AllUsersView component: should render pagination link when counter is greater than 8 1`] = `
+<AllUsersView
+  allUsers={
+    Array [
+      Object {
+        "createdAt": "Sun Aug 13 2017 13:01:58 GMT+0100 (WAT)",
+        "email": "jackson@gmail.com",
+        "id": 1,
+        "isactive": true,
+        "roleId": 3,
+        "username": "jackson",
+      },
+    ]
+  }
+  counter={9}
+  currentPage={1}
+  deactivateUser={[Function]}
+  error="Access denied!"
+  fetchAllUsers={[Function]}
+  responseStatus="unsuccessful"
+>
+  <section>
+    <p>
+      Access denied!
+    </p>
+  </section>
+</AllUsersView>
+`;

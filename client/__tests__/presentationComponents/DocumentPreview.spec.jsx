@@ -10,6 +10,7 @@ describe('The DocumentPreview component:', () => {
   const event = {
     preventDefault: () => 'hello',
   };
+  const response = { status: 'successful' };
   const props = {
     userDocuments: [{
       title: 'jackson goes to school',
@@ -17,7 +18,7 @@ describe('The DocumentPreview component:', () => {
       id: 1,
       userId: 2,
     }],
-    readDocument: jest.fn(() => Promise.resolve()),
+    readDocument: jest.fn(() => Promise.resolve(response)),
     read: 1,
     deleteId: 1,
     history: { push: jest.fn() },
@@ -30,6 +31,24 @@ describe('The DocumentPreview component:', () => {
     userId: 1,
   };
   test('should render the DocumentPreview component correctly', () => {
+    const enzymeWrapper = shallow(<DocumentPreview {...props} />);
+    const component = enzymeWrapper;
+    const tree = toJson(component);
+    expect(tree).toMatchSnapshot();
+  });
+
+  test(`should render the delete button when previewing documents
+  created created by me`, () => {
+    props.userId = 2;
+    const enzymeWrapper = shallow(<DocumentPreview {...props} />);
+    const component = enzymeWrapper;
+    const tree = toJson(component);
+    expect(tree).toMatchSnapshot();
+  });
+
+  test(`should render pagination links in DocumentPreview component when
+  document count is greater than 8`, () => {
+    props.documentsCount = 9;
     const enzymeWrapper = shallow(<DocumentPreview {...props} />);
     const component = enzymeWrapper;
     const tree = toJson(component);
@@ -80,6 +99,17 @@ describe('The DocumentPreview component:', () => {
       const enzymeWrapper = shallow(<DocumentPreview {...props} />);
       enzymeWrapper.find('button[name="read-doc"]').props().onClick(event);
       expect(props.readDocument.mock.calls.length).toBe(2);
+    });
+
+  test(`should show error message when button[name="read-doc"] is clicked
+  and an`,
+    () => {
+      response.status = 'unsuccessful';
+      const enzymeWrapper = shallow(<DocumentPreview {...props} />);
+      enzymeWrapper.find('button[name="read-doc"]').props().onClick(event);
+      const component = enzymeWrapper;
+      const tree = toJson(component);
+      expect(tree).toMatchSnapshot();
     });
 
   test('should fire deleteDocument when button[name="delete-doc"] is clicked',
