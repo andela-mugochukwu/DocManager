@@ -1,0 +1,356 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The UserView component: should alert error message when editing function fails 1`] = `
+<UserView
+  changeInputValue={[Function]}
+  createdAt="sun june 3, 2013"
+  editUserDetail={[Function]}
+  roleType="Learning"
+  updateStatus="updating"
+  userEmail="jackson@gmail.com"
+  userId={2}
+  userName="jackson"
+>
+  <div
+    className="container"
+    id="userview"
+  >
+    <h5
+      className="center-align"
+    >
+      SignUp Details
+    </h5>
+    <hr />
+    <div
+      className="row"
+    >
+      <div
+        className="col m2"
+      >
+        <label
+          htmlFor="username"
+        >
+          Name:
+        </label>
+      </div>
+      <div
+        className="col m10"
+      >
+        <input
+          disabled={true}
+          id="username"
+          type="text"
+          value="jackson"
+        />
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col m2"
+      >
+        <label
+          htmlFor="userEmail"
+        >
+          Email:
+        </label>
+      </div>
+      <div
+        className="col m10"
+      >
+        <input
+          disabled={true}
+          id="userEmail"
+          onChange={[Function]}
+          type="text"
+          value="jackson@gmail.com"
+        />
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col m2"
+      >
+        <label
+          htmlFor="roleType"
+        >
+          Department:
+        </label>
+      </div>
+      <div
+        className="col m10"
+      >
+        <input
+          disabled={true}
+          id="roleType"
+          type="text"
+          value="Learning"
+        />
+      </div>
+    </div>
+    <div
+      className="hide"
+      id="passwordreset"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col m2"
+        >
+          <label
+            htmlFor="oldpassword"
+          >
+            Old password:
+          </label>
+        </div>
+        <div
+          className="col m10"
+        >
+          <input
+            id="oldpassword"
+            type="password"
+          />
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col m2"
+        >
+          <label
+            htmlFor="newpassword"
+          >
+            New password:
+          </label>
+        </div>
+        <div
+          className="col m10"
+        >
+          <input
+            id="newpassword"
+            type="password"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col m2"
+      >
+        <label
+          htmlFor="signUpDate"
+        >
+          Registered on:
+        </label>
+      </div>
+      <div
+        className="col m10"
+      >
+        <input
+          disabled={true}
+          id="signUpDate"
+          type="text"
+          value="sun june 3, 2013"
+        />
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <button
+        className="btn"
+        id="editbtn"
+        onClick={[Function]}
+      >
+        Edit profile
+      </button>
+      <button
+        className="btn hide"
+        id="submitedit"
+        onClick={[Function]}
+      >
+        updating
+      </button>
+    </div>
+  </div>
+</UserView>
+`;
+
+exports[`The UserView component: should render the userview component correctly 1`] = `
+<div
+  className="container"
+  id="userview"
+>
+  <h5
+    className="center-align"
+  >
+    SignUp Details
+  </h5>
+  <hr />
+  <div
+    className="row"
+  >
+    <div
+      className="col m2"
+    >
+      <label
+        htmlFor="username"
+      >
+        Name:
+      </label>
+    </div>
+    <div
+      className="col m10"
+    >
+      <input
+        disabled={true}
+        id="username"
+        type="text"
+        value="jackson"
+      />
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="col m2"
+    >
+      <label
+        htmlFor="userEmail"
+      >
+        Email:
+      </label>
+    </div>
+    <div
+      className="col m10"
+    >
+      <input
+        disabled={true}
+        id="userEmail"
+        onChange={[Function]}
+        type="text"
+        value="jackson@gmail.com"
+      />
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="col m2"
+    >
+      <label
+        htmlFor="roleType"
+      >
+        Department:
+      </label>
+    </div>
+    <div
+      className="col m10"
+    >
+      <input
+        disabled={true}
+        id="roleType"
+        type="text"
+        value="Learning"
+      />
+    </div>
+  </div>
+  <div
+    className="hide"
+    id="passwordreset"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col m2"
+      >
+        <label
+          htmlFor="oldpassword"
+        >
+          Old password:
+        </label>
+      </div>
+      <div
+        className="col m10"
+      >
+        <input
+          id="oldpassword"
+          type="password"
+        />
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col m2"
+      >
+        <label
+          htmlFor="newpassword"
+        >
+          New password:
+        </label>
+      </div>
+      <div
+        className="col m10"
+      >
+        <input
+          id="newpassword"
+          type="password"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="col m2"
+    >
+      <label
+        htmlFor="signUpDate"
+      >
+        Registered on:
+      </label>
+    </div>
+    <div
+      className="col m10"
+    >
+      <input
+        disabled={true}
+        id="signUpDate"
+        type="text"
+        value="sun june 3, 2013"
+      />
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <button
+      className="btn"
+      id="editbtn"
+      onClick={[Function]}
+    >
+      Edit profile
+    </button>
+    <button
+      className="btn hide"
+      id="submitedit"
+      onClick={[Function]}
+    >
+      updating
+    </button>
+  </div>
+</div>
+`;

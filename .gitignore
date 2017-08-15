@@ -1,0 +1,9 @@
+/node_modules/*
+.DS_Store
+.env
+/client/assets/
+.vscode
+/coverage/
+selenium-debug.log
+reports/
+.nyc_output/

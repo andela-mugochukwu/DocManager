@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The About component: should render correctly 1`] = `
+<About>
+  <div
+    className="aboutpage container"
+  >
+    <h3
+      className="center-align"
+    >
+      About DocManger
+    </h3>
+    <hr />
+    <p>
+      DocManger is an electronic document management system that helps you manage your documents for easy sharing and accessing. It offers features such as creating, editing, restricting and sharing personal documents.
+    </p>
+    <h4
+      className="center-align"
+    >
+      Contributors
+    </h4>
+    <hr />
+    <ol>
+      <li>
+        Mazi Ugochukwu Kingsley
+      </li>
+      <li>
+        Mark Edomwande
+      </li>
+    </ol>
+  </div>
+</About>
+`;

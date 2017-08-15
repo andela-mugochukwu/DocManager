@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The search box component: should display bold white bottom border when focused 1`] = `
+<div
+  className="searchcontainer"
+>
+  <div>
+    <input
+      onChange={[Function]}
+      placeholder="search all documents"
+      type="text"
+    />
+  </div>
+</div>
+`;

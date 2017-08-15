@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Home component: should render the Home component correctly 1`] = `
+<div
+  className="row homescreen"
+>
+  <h1
+    className="center-align"
+  >
+    DocManger
+  </h1>
+  <p
+    className="center-align"
+  >
+    Create, secure and access documents from anywhere in the world.
+  </p>
+  <Connect(withRouter(Authenticate)) />
+</div>
+`;

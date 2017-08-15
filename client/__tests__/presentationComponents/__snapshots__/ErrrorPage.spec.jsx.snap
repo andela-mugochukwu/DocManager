@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The ErrorPage component: should render the ErrorPage component correctly 1`] = `
+<div
+  className="container"
+  id="errorpage"
+>
+  <h4
+    className="center-align"
+  >
+    Oops..
+  </h4>
+  <p>
+    An error just occured; We are sorry about this.
+  </p>
+</div>
+`;

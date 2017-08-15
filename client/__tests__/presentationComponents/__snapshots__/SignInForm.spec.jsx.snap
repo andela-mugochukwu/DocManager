@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The signinform component: should render the signinform correctly 1`] = `
+<div
+  className=""
+  id="signinform"
+>
+  <input
+    className="forminput"
+    placeholder="Username"
+    type="text"
+  />
+  <input
+    className="forminput"
+    placeholder="Password"
+    type="password"
+  />
+  <button
+    className="center-align waves-effect waves-light btn"
+    id="signinbtn"
+    onClick={[Function]}
+  >
+    submit
+  </button>
+</div>
+`;

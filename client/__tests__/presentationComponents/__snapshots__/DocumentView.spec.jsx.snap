@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The DocumentView component: should render an error message when shoulddisplay is false 1`] = `
+<div
+  id="doc-view-background"
+>
+  <div>
+    <Connect(withRouter(Search)) />
+    <p
+      className="center-align"
+      id="status"
+    >
+      No document found!
+    </p>
+  </div>
+</div>
+`;
+
+exports[`The DocumentView component: should render the DocumentView component correctly 1`] = `
+<div
+  id="doc-view-background"
+>
+  <div>
+    <Connect(withRouter(Search)) />
+    <DocumentPreview
+      currentPage={1}
+      deleteDocument={[Function]}
+      deleteId={1}
+      documentAccess="Admin"
+      documentsCount={1}
+      history={
+        Object {
+          "push": [Function],
+        }
+      }
+      paginateDocument={[Function]}
+      read={1}
+      readDocument={[Function]}
+      roleType="Learning"
+      userDocuments={
+        Array [
+          Object {
+            "body": "jackson goes to church",
+            "id": 1,
+            "title": "jackson goes to school",
+          },
+        ]
+      }
+      userId={1}
+    />
+  </div>
+</div>
+`;

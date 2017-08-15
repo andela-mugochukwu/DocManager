@@ -1,0 +1,247 @@
+$backgroundcolor: rgb(62,111,111);
+$shadebackground: #0288d1;
+$authbackground: #339cd5;
+$docpreviewbkg: #eceff1;
+$btncolor: #2e71b4;
+$btnhover: #90caf9;
+$contentpadding: 5px;
+$docviewfontsize: 70px;
+$italicstylefont: 'Lobster', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$previewfontstyle: 'Asap Condensed', sans-serif;
+$previewheaderstyle: 'Bree Serif', serif;
+$textcolor: #2c3a46;
+
+body, .aboutpage h3, .aboutpage h4{
+	color: $textcolor;
+}
+section {
+	color: whitesmoke;
+}
+.homebtncolor{
+	padding: 0 30px;
+	background: inherit;
+	text-transform: uppercase;
+}
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]){
+	border-bottom: 1px solid whitesmoke;
+	box-shadow: 0 1px 0 0 whitesmoke;
+}
+.aboutpage{
+	h3{
+		display: block;
+	}
+	p,ol{
+		color: gray;
+	}
+}
+.btn, button{
+	background: $btncolor;
+}
+.btn:hover, button:hover{
+	background: #79aeea;
+}
+.btn:focus{
+	background: $docpreviewbkg;
+	color: $textcolor;
+}
+.row{
+	margin-bottom: 0;
+}
+button{
+	background: btncolor;
+}
+.bkgImage{
+	position: absolute;
+	background: $docpreviewbkg;
+
+	.homescreen{
+		margin-top: 100px;
+		width: 50%;
+		background: $authbackground;
+		padding-bottom: 15px;
+		border-radius: 10px;
+			h1.center-align{
+				font-size: 90px;
+				margin-top: 0;
+				font-family: $italicstylefont; 
+			}
+			#gettingstarted{
+				margin-left: 40%;
+				margin-right: auto;
+			}
+	}
+	#signupform div{
+		margin-bottom: 15px;
+	}
+
+	#mainoverlay{
+		position: absolute;
+		background: rgba(62,111,111, 0.7);
+		top: 0;
+		left: 0;
+	}
+}
+#roles{
+	color: white;
+	input[type=radio], label{
+		color: whitesmoke;
+	}
+}
+#readdocument{
+	color: $textcolor;
+	#docbody{
+		color: gray;
+	}
+	button{
+		margin-left: 3px;
+	}
+	input{
+		font-size: xx-large;
+	}
+}
+#viewusers{
+	button{
+		color: whitesmoke;
+	}
+}
+#userview{
+	color: $textcolor; 
+	h5{
+		display: "block";
+	}
+	div.row{
+		padding: 5px 10px;
+	}
+}
+.header {
+	background: $shadebackground;
+	span.left{
+		font-family: $italicstylefont;
+		font-size: 40px;
+	}
+	span.right{
+		background: white;
+		margin: 5px;
+		padding: 10px;
+		a:hover{
+			text-decoration: underline;
+		}
+	}
+}
+input[type=text]:not(.browser-default):disabled{
+	color: gray;
+}
+#doccontent{
+	min-height: inherit;
+	h5,h8{
+		width: 100%;
+		display: inline-block;
+	}
+	strong{
+		padding: 3px;
+		display: inline-block;
+		background: $btncolor;
+		border-radius: 7px;
+	}
+	.header{
+		min-height: inherit;
+	}
+	#contentdisplay{
+		min-height: inherit;
+		div.container{
+			width: 90%;
+			background: $docpreviewbkg;
+			padding: 20px;
+		}
+	}
+	a{
+		display: block;
+		background: $btncolor;
+		margin: 4px 0;
+		padding: 4px;
+		color: inherit;
+	}
+	#docview{
+		div{
+			background: $shadebackground;
+			max-height: 190px;
+			padding: 5px;
+			margin: 5px;
+			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+			h6{
+				font-weight: bold;
+				font-family: $previewheaderstyle;
+				height: 25px;
+			 	white-space: nowrap; 
+				width: 12em; 
+				overflow: hidden;
+				text-overflow: ellipsis; 
+			}
+			button{
+				border: thin solid whitesmoke;
+			}
+		}
+	}
+	#errorpage{
+		font-weight: bold;
+		font-size: 3em;
+		color: gray;
+		width: 50%;
+		margin: 70px auto;
+		font-family: $italicstylefont;
+	}
+	p#status{
+		font-size: $docviewfontsize;
+		margin: 100px 60px;;
+	}
+	.docicon{
+		display: block;
+		font-size: $docviewfontsize;
+	}
+}
+.searchcontainer{
+	position: relative;
+	input{
+		color: $textcolor;
+	}
+}
+#docform{
+	color: $textcolor;
+	input, textarea{
+	border-color: $btncolor;
+	}
+	textarea{
+		height: 40%;
+	}
+}
+#doc-view-background{
+	min-height: inherit
+}
+.docbackground{
+	background: $shadebackground;
+}
+footer {
+	background: $shadebackground;
+	min-height: 35px;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+}
+label{
+	padding-right: 10px;
+}
+.forminput {
+	padding-left: 5px;
+}
+.a{
+	display: block;
+}
+.footer {
+	margin-top: 20px;
+
+	a {
+		padding: 5px 10px 5px 0;
+	}
+}
