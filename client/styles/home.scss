@@ -57,14 +57,16 @@ button{
 	background: btncolor;
 }
 .bkgImage{
-	position: absolute;
-	background: $docpreviewbkg;
+	position: relative;
+	background: url('../assets/images/document-manager.jpg')
+		top center/
+		cover
+		$docpreviewbkg;
 
 	.homescreen{
-		margin-top: 100px;
 		width: 50%;
-		background: $authbackground;
-		padding-bottom: 15px;
+		height: inherit;
+		padding-top: 10%;
 		border-radius: 10px;
 			h1.center-align{
 				font-size: 90px;
@@ -248,4 +250,10 @@ label{
 	a {
 		padding: 5px 10px 5px 0;
 	}
+}
+
+@media screen and (max-width : 480px) {
+	.bkgImage .homescreen{
+	 width: 100%;
+ }
 }

@@ -7,7 +7,7 @@ import Auth from '../container/Auth';
  * @return {object} - Returns the html to render
  */
 const home = () => (
-  <div className="row homescreen">
+  <div className="homescreen">
     <h1 className="center-align">DocManger</h1>
     <p className="center-align">
       Create, secure and access documents

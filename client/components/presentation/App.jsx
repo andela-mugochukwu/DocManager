@@ -10,8 +10,7 @@ import Routes from '../../Routes';
  */
 const App = () => {
   const minHeight = {
-    minHeight: window.innerHeight || document.documentElement.clientHeight,
-    width: window.innerWidth || document.documentElement.clientWidth
+    height: window.innerHeight || document.documentElement.clientHeight,
   };
   return (
     <section style={minHeight} className="bkgImage">
