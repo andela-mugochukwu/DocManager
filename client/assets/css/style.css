@@ -3244,12 +3244,12 @@ nav {
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Medium), url(/Users/andeladeveloper/Documents/AndelaProjects/DocManager/client/assets1561b424aaef2f704bbd89155b3ce514.woff2) format("woff2"), url(/Users/andeladeveloper/Documents/AndelaProjects/DocManager/client/assetscf4d60bc0b1d4b2314085919a00e1724.woff) format("woff");
+  src: local(Roboto Medium), url(/Users/andeladeveloper/Documents/Projects/DocManager/client/assets1561b424aaef2f704bbd89155b3ce514.woff2) format("woff2"), url(/Users/andeladeveloper/Documents/Projects/DocManager/client/assetscf4d60bc0b1d4b2314085919a00e1724.woff) format("woff");
   font-weight: 500; }
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Bold), url(/Users/andeladeveloper/Documents/AndelaProjects/DocManager/client/assetsc0f1e4a4fdfb8048c72e86aadb2a247d.woff2) format("woff2"), url(/Users/andeladeveloper/Documents/AndelaProjects/DocManager/client/assetseed9aab5449cc9c8430d7d258108f602.woff) format("woff");
+  src: local(Roboto Bold), url(/Users/andeladeveloper/Documents/Projects/DocManager/client/assetsc0f1e4a4fdfb8048c72e86aadb2a247d.woff2) format("woff2"), url(/Users/andeladeveloper/Documents/Projects/DocManager/client/assetseed9aab5449cc9c8430d7d258108f602.woff) format("woff");
   font-weight: 700; }
 
 a {
@@ -6903,7 +6903,7 @@ button {
 
 .bkgImage {
   position: relative;
-  background: url(/Users/andeladeveloper/Documents/AndelaProjects/DocManager/client/assetsf009a51894de5af407be88db000c4544.jpg) top center/cover #eceff1; }
+  background: url(/Users/andeladeveloper/Documents/Projects/DocManager/client/assetsf009a51894de5af407be88db000c4544.jpg) top center/cover #eceff1; }
   .bkgImage .homescreen {
     width: 50%;
     height: inherit;
