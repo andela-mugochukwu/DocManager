@@ -1,0 +1,303 @@
+$roboto-font-path: "/fonts/roboto/";
+$card-padding: 24px 30px; 
+@import "materialize-src/sass/materialize";
+
+
+$section-bg-color: #f0f1f3;
+$backgroundcolor: rgb(62,111,111);
+$shadebackground: #0288d1;
+$authbackground: #339cd5;
+$docpreviewbkg: #2b2e36;
+$btncolor: #2e71b4;
+$btnhover: #90caf9;
+$contentpadding: 5px;
+$docviewfontsize: 70px;
+$italicstylefont: 'Lobster', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$previewfontstyle: 'Asap Condensed', sans-serif;
+$previewheaderstyle: 'Bree Serif', serif;
+$textcolor: #333536;
+
+body, .aboutpage h3, .aboutpage h4{
+	color: $textcolor;
+}
+section div.homescreen {
+	color: whitesmoke;
+}
+.homebtncolor{
+	padding: 0 30px;
+	background: inherit;
+	text-transform: uppercase;
+}
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]){
+	border-bottom: 1px solid whitesmoke;
+	box-shadow: 0 1px 0 0 whitesmoke;
+}
+#editbtn{
+	margin-right: 3px;
+	margin-left: 5px;
+}
+.aboutpage{
+	h3{
+		display: block;
+	}
+	p,ol{
+		color: gray;
+	}
+}
+.btn, button{
+	background: $btncolor;
+}
+.btn:hover, button:hover{
+	background: #79aeea;
+}
+.btn:focus{
+	background: $docpreviewbkg;
+	color: $textcolor;
+}
+.row{
+	margin-bottom: 0;
+}
+button{
+	background: btncolor;
+}
+.loptions{
+	display: block;
+	padding: 5px 5px;
+}
+.main-section {
+	background-color: $section-bg-color;
+	.header {
+		background-color: $docpreviewbkg;
+	}
+}
+section.row.main-section {
+	margin-bottom: 0;
+}
+.bkgImage{
+	position: relative;
+	background: url('/static/images/document-manager.jpg')
+		top center/
+		cover
+		$docpreviewbkg;
+
+	.homescreen{
+		width: 50%;
+		height: inherit;
+		padding-top: 10%;
+		border-radius: 10px;
+			h1.center-align{
+				font-size: 60px;
+				margin-top: 0;
+				font-family: $italicstylefont;
+			}
+			#gettingstarted{
+				margin-left: 40%;
+				margin-right: auto;
+			}
+	}
+	#signupform{
+		padding-bottom: 15px;
+	}
+	#mainoverlay{
+		position: absolute;
+		background: rgba(62,111,111, 0.7);
+		top: 0;
+		left: 0;
+	}
+}
+#roles{
+	color: white;
+	input[type=radio], label{
+		color: whitesmoke;
+	}
+}
+#readdocument{
+	color: $textcolor;
+	#docbody{
+		color: gray;
+	}
+	button{
+		margin-left: 3px;
+	}
+	input{
+		font-size: xx-large;
+	}
+}
+#viewusers{
+	button{
+		color: whitesmoke;
+	}
+}
+#userview{
+	color: $textcolor; 
+	h5{
+		display: "block";
+	}
+	div.row{
+		padding: 5px 10px;
+	}
+}
+.header {
+	span.left{
+		font-size: large;
+	}
+	span.right{
+		.btn {
+			background: #980e0e;
+		}
+		
+		padding-left: 4px;
+		padding-right: 4px;
+		margin-top: 10px;
+		a:hover{
+			text-decoration: underline;
+			border: solid thin #a51919;
+		}
+	}
+}
+input[type=text]:not(.browser-default):disabled{
+	color: gray;
+}
+.h6 {
+	color: #3e3b3b;
+}
+#doccontent{
+	min-height: inherit;
+	h5,h8{
+		width: 100%;
+		display: inline-block;
+	}
+	strong{
+		padding: 3px;
+		display: inline-block;
+		background: $btncolor;
+		border-radius: 7px;
+	}
+	.header{
+		min-height: inherit;
+	}
+	#contentdisplay{
+		min-height: inherit;
+		div.container{
+			width: 90%;
+			background: $docpreviewbkg;
+			padding: 20px;
+		}
+	}
+	a{
+		display: block;
+		background: $btncolor;
+		margin: 4px 0;
+		padding: 4px;
+		color: inherit;
+	}
+	#errorpage{
+		font-weight: bold;
+		font-size: 3em;
+		color: gray;
+		width: 50%;
+		margin: 70px auto;
+		font-family: $italicstylefont;
+	}
+	p#status{
+		font-size: $docviewfontsize;
+		margin: 100px 60px;;
+	}
+	.docicon{
+		display: block;
+		font-size: $docviewfontsize;
+	}
+}
+.rel {
+	position: relative;
+}
+#docview{
+	h6.light-blue {
+		padding: 7px 5px;
+	}
+	.card {
+		div:nth-of-type(1) {
+			height: 110px;
+			overflow: hidden;
+			p {
+				height: 95px;
+				padding:2px 10px;
+				overflow: hidden;
+				display: -webkit-box;
+				line-clamp: 3;
+				box-orient: vertical;
+				-webkit-line-clamp: 4;
+				-webkit-box-orient: vertical;
+			}
+		}
+		div {
+			height: 40px;
+			padding-right: 10px;
+		}
+	}
+	a {
+		padding: 4px;
+		padding-bottom: 2px;
+		border: solid thin;
+		margin: 2px;
+	}
+	a:hover {
+		cursor: pointer;
+		text-decoration: underline;
+		background-color: #e1f5fe;
+		border-color: #90caf9;
+	}
+	&.card {
+		//background-color: $section-bg-color;
+		hr {
+			color: $section-bg-color;
+		}
+	}
+}
+.searchcontainer{
+	position: relative;
+	input{
+		color: $textcolor;
+	}
+}
+#docform{
+	color: $textcolor;
+	input, textarea{
+	border-color: $btncolor;
+	}
+	textarea{
+		height: 40%;
+	}
+}
+#doc-view-background{
+	min-height: inherit
+}
+.docbackground{
+	background: $shadebackground;
+}
+footer {
+	background: #121219;
+	padding: 15px 10px;
+	min-height: 35px;
+	width: 100%;
+	a {
+		font-size: small;
+	}
+}
+label{
+	padding-right: 10px;
+}
+.forminput {
+	padding-left: 5px;
+}
+.a{
+	display: block;
+}
+
+@media screen and (max-width : 480px) {
+	.bkgImage .homescreen{
+	 width: 100%;
+ }
+}
